@@ -1,0 +1,156 @@
+<?php
+
+App::uses('Tools', 'Vendor');
+
+class CompaniesController extends AppController {
+	public $name = 'Companies';
+	public $helpers = array('Html', 'Form');
+	private $itemPerPage = 5;
+
+	function beforeFilter() {
+		parent::beforeFilter();
+		$this->Auth->allow('show_company', 'edit_company', 'inscription', 'allow', 'deny');
+	}
+
+	public function index($page = 1) {
+		$this->loadModel('Applicant');
+		$this->set('companies', $this->Company->find('all'));
+		$this->set('itemPerPage', $this->itemPerPage);
+		if ($page == 1) {
+			$this->set('pages', array($page => true, $page + 1 => false, $page + 2 => false));
+		} else {
+			$this->set('pages', array($page - 1 => false, $page => true, $page + 1 => false));
+		}
+	}
+
+	public function edit_company() {
+		$this->loadModel('Applicant');
+		App::uses('NotifEventListener', 'Event');
+		$this->Company->getEventManager()->attach(new NotifEventListener());
+		$id = $this->Session->read("Applicant.id");
+		$applicant = $this->Applicant->find('first', array('conditions' => array('Applicant.id' => $id)));
+		if (isset($id) && !empty($applicant)) {
+			$applicant['Company']['creation_date'] = date("d-m-Y", strtotime($applicant['Company']['creation_date']));
+			$this->set('company_to_edit', $applicant['Company']);
+			$applicants = $this->Applicant->find('all', array('conditions' => array('company_id' => $applicant['Company']['id'])));
+			$this->set('applicants', $applicants);
+			if ($this->request->is('post', 'put')) {
+				$this->Company->set($this->request->params['form']);
+				$this->request->data['Company']['id'] = $applicant['Company']['id'];
+				$this->request->data['Company']['applicant_id'] = $id;
+				
+				$this->request->data['Company']['account'] = $this->request->data['account'];
+				$this->request->data['Company']['capital'] = $this->request->data['capital'];
+				unset($this->request->data['account']);
+				unset($this->request->data['capital']);
+
+				// debug($this->request->data);
+				// debug($this->request->params['form']); die();
+				$this->request->data['Company']['creation_date'] = date("Y-m-d", strtotime($this->request->data['Company']['creation_date']));
+				if ($this->Company->save($this->request->data, false)) {
+					return $this->redirect(array('controller' => 'profiles', 'action' => 'edit_profile'));
+				} else {
+					debug($this->Company->validationErrors); die();
+				}
+			}
+		} else {
+			return $this->redirect(array('controller' => 'main', 'action' => 'index'));
+		}
+	}
+
+	public function show_company() {
+		$this->layout = null;
+		if ($this->request->is('ajax')) {
+			if (!empty($this->request->data['Company']['id'])) {
+				$company =  $this->Company->findById($this->request->data['Company']['id'], array('recursive' => 0));
+				if (!empty($company)) {
+					$company['Company']['address'] = $company['Company']['street_number'] . ', ' . $company['Company']['street_name'] . ' ' . $company['Company']['zip_code'] . ' ' . $company['Company']['city_name'];
+					$company['Company']['creation_date'] = date("d-m-Y", strtotime($company['Company']['creation_date']));
+					$company['Company']['capital'] = ($company['Company']['capital']) ? 'Oui' : 'Non';
+					$company['Company']['account'] = ($company['Company']['account']) ? 'Oui' : 'Non';
+					Tools::unsetFromArray($company['Company'], array(
+						'event_id',
+						'zip_code',
+						'street_name',
+						'street_number',
+						'city_name'
+						));
+					$this->set('company', $company);
+					$this->loadModel('Applicant');
+					$applicants = $this->Applicant->find('all', array('conditions' => array('company_id' => $this->request->data['Company']['id'])));
+					if (!empty($applicants)) {
+						foreach ($applicants as $key => &$value) {
+							Tools::unsetFromArray($applicants[$key], array(
+								'Company',
+								'Applicant'
+								));
+							$value['Profile']['address'] = $value['Profile']['street_number'] . ', ' . $value['Profile']['street_name'] . ' ' . $value['Profile']['zip_code'] . ' ' . $value['Profile']['city_name'];
+							$value['Profile']['birthdate'] = date("d-m-Y", strtotime($value['Profile']['birthdate']));
+							$value['Profile']['is_payed'] = ($value['Profile']['is_payed']) ? 'Oui' : 'Non';
+						}
+						$this->set('applicants', $applicants);
+					}
+				}
+			}
+		} 
+	}
+
+	public function allow() {
+		$this->autoRender = false;
+		if ($this->request->is('ajax')) {
+				if (!empty($this->request->data['Company']['data'])) {
+				$data = explode('@', $this->request->data['Company']['data']);
+				if (count($data) == 3) { 
+					$company = $this->Company->find('first', array('conditions' => array(
+						'Company.id' => $data[0]
+						), 'recursive' => 0));
+					if (!empty($company) && !$company['Company']['is_' . $data[1] . '_valid']) {
+						$this->Company->id = $data[0];
+						$this->Company->saveField('is_' . $data[1] . '_valid', true);
+						return json_encode(true);
+					}
+				}
+			}
+		}
+		return json_encode(false);
+	}
+
+	public function deny() {
+		$this->autoRender = false;
+		if ($this->request->is('ajax')) {
+			if (!empty($this->request->data['Company']['data'])) {
+				$data = explode('@', $this->request->data['Company']['data']);
+				if (count($data) == 3) { 
+					$company = $this->Company->find('first', array('conditions' => array(
+						'Company.id' => $data[0]
+						), 'recursive' => 0));
+					if (!empty($company) && $company['Company']['is_' . $data[1] . '_valid']) {
+						$this->Company->id = $data[0];
+						$this->Company->saveField('is_' . $data[1] . '_valid', false);
+						return json_encode(true);
+					}
+				}
+			}
+		}
+		return json_encode(false);
+	}
+
+	public function inscription() {
+		$id = $this->Session->read("Applicant.id");
+		if (isset($id)) {
+			$this->loadModel('Event');
+			$events = $this->Event->find('all');
+			$dateObject = array();
+			$dateObject['Aucune'] = 'Aucune';
+			foreach ($events as $evt) {
+				$dateObject["Le " . $evt['Event']['date'] . " à " . $evt['Event']['start_time'] . " : " . $evt['Event']['name']] = $evt['Event']['street_number'] . ", " . $evt['Event']['street_name'] . " " . $evt['Event']['zip_code'] . " " . $evt['Event']['city_name'];
+			}
+			$this->set('dates', $dateObject);
+			return;
+		} else {
+			return $this->redirect(array('controller' => 'main', 'action' => 'index'));
+		}
+	}
+}
+
+?>
