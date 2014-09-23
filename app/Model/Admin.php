@@ -26,12 +26,12 @@ class Admin extends AppModel {
 			)
 		);
 
-	public function sendMail($data, $token, $template, $subject) {
+	public function sendMail($data, $token, $action, $template, $subject) {
 		$this->set($data);
 		if ($this->validates()) {
-			$link = Configure::read('App.host') . 'admins/activate' . $token;
+			$link = Configure::read('App.host') . $action . $token;
 			App::uses('CakeEmail', 'Network/Email');
-			$mail = new CakeEmail();
+			$mail = (FULL_BASE_URL == 'http://localhost:82') ? new CakeEmail('gmail') : new CakeEmail();
 			$mail->to($data['Admin']['username'])
 			->from('no-replay@scientipole.org')
 			->subject($subject)

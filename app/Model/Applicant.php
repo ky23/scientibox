@@ -18,7 +18,7 @@ class Applicant extends AppModel {
 		if ($this->validates()) {
 			$link = Configure::read('App.host') .'applicants/login/' . $token;
 			App::uses('CakeEmail', 'Network/Email');
-			$mail = new CakeEmail();
+			$mail = (FULL_BASE_URL == 'http://localhost:82') ? new CakeEmail('gmail') : new CakeEmail();
 			$mail->to(array('khatal.yacine@gmail.com','testscientiweb5@gmail.com')) //$mail->to($data['email'])
 			->from('no-replay@scientipole.org')
 			->subject('Scientibox login')

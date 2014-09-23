@@ -41,7 +41,7 @@ class Contact extends AppModel {
 		$this->set($data);
 		if ($this->validates()) {
 			App::uses('CakeEmail', 'Network/Email');
-			$mail = new CakeEmail();
+			$mail = (FULL_BASE_URL == 'http://localhost:82') ? new CakeEmail('gmail') : new CakeEmail();
 			$mail->to(array('khatal.yacine@gmail.com','testscientiweb5@gmail.com'))
 			->from($data['email'])
 			->subject('Scientibox contact subject :' . $data['subject']);

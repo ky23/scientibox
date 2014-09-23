@@ -44,7 +44,7 @@ class AdminsController extends AppController {
 					$this->request->data['Admin']['password'] = $this->randomPassword();
 					if ($this->Admin->save($this->request->data, false)) {
 						$token = $this->Admin->id . '@' . md5($this->request->data['Admin']['username']);
-						$this->Admin->sendMail($this->request->data, $token, 'add_account', 'Inscription Scientibox');
+						$this->Admin->sendMail($this->request->data, $token, 'admins/activate/', 'add_account', 'Inscription Scientibox');
 						$this->Session->setFlash('Votre compte à bien été ajouté', 'flash_success');
 					} else {
 						$this->Session->setFlash('Les informations saisies sont incorrectes.', 'flash_error');
@@ -79,12 +79,8 @@ class AdminsController extends AppController {
 			if ($this->Session->check('Admins.key') && strcasecmp($this->Session->read('Admins.key'), $this->request->data['key']) === 0) {
 				$admin = $this->Admin->find('first', array('conditions' => array('username' => $this->request->data['Admin']['username'], 'active' => true)));
 				if (!empty($admin)) {
-					$link = array(
-						'controller' => 'admins',
-						'action' => 'change_password',
-						$admin['Admin']['id'] . '@' . md5($this->request->data['Admin']['username']
-							));
-					if ($this->Admin->sendMail($this->request->data, $link, 'forgot_password', 'Mot de passe oublié Scientibox')) {
+					$token = $admin['Admin']['id'] . '@' . md5($this->request->data['Admin']['username']);
+					if ($this->Admin->sendMail($this->request->data, $token, 'admins/change_password/', 'forgot_password', 'Mot de passe oublié Scientibox')) {
 						$this->Session->setFlash("Un mail vient de vous être envoyé.", 'flash_success');
 					}
 				} else {
