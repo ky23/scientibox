@@ -15,7 +15,7 @@ class HomeController extends AppController {
 
 	function beforeFilter() {
 		parent::beforeFilter();
-		$this->Auth->allow(array('index', 'contact', 'about', 'captcha'));
+		$this->Auth->allow(array('index', 'contact', 'about', 'captcha', 'cgu'));
 	}
 	
 	public function index() {
@@ -25,7 +25,6 @@ class HomeController extends AppController {
 	public function contact() {
 		$this->loadModel('Contact');
 		$this->Session->delete('Message.flash');
-		$this->set('captcha_fields', $this->captchas);
 		if ($this->request->is('post')) {
 			if ($this->Session->check('Contact.key') && strcasecmp($this->Session->read('Contact.key'), $this->request->data['key']) === 0) {
 				foreach($this->captchas as $field) {
@@ -42,12 +41,13 @@ class HomeController extends AppController {
 					}
 					$this->Session->delete('key');
 				} else {
-					$this->Session->setFlash($this->Contact->validationErrors['captcha'], 'flash_error');
+					$this->Session->setFlash('Le texte saisi ne correspond pas', 'flash_error');
 				}
 			} else {
 				$this->Session->setFlash('Votre message a déja été envoyé', 'flash_success');
 			}
 		}
+		$this->set('captcha_fields', $this->captchas);
 	}
 
 	public function captcha()  {
@@ -63,6 +63,11 @@ class HomeController extends AppController {
 	}
 
 	public function about() {
+		return;
+	}
+
+	public function cgu() {
+		$this->autoRender = false;
 		return;
 	}
 }

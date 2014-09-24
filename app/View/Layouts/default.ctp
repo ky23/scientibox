@@ -80,7 +80,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 							<li class="<?php echo (!empty($this->params['action']) && ($this->params['action'] == 'contact') && $this->params['controller'] == 'home') ? 'active' : 'inactive' ?>">
 								<?php echo $this->Html->link('Nous contacter',
 								array('controller' => 'home', 'action' => 'contact'));?>
-								<div class="trapez3" style="visibility: <?php echo (!empty($this->params['action']) && ($this->params['action'] == 'index') && $this->params['controller'] == 'contact')?'visible' :'hidden' ?>"></div>
+								<div class="trapez3" style="visibility: <?php echo (!empty($this->params['action']) && ($this->params['action'] == 'contact') && $this->params['controller'] == 'home')?'visible' :'hidden' ?>"></div>
 							</li>
 						</ul>
 					</div> <!-- end of navbar-collapse -->
@@ -112,19 +112,22 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 					<ul class="footer-brand">
 						<li class="<?php echo (!empty($this->params['action']) && ($this->params['action'] == 'about') && $this->params['controller'] == 'main') ? 'active' : 'inactive' ?>">
 							<?php echo $this->Html->link('A propos',
-							array('controller' => 'home', 'action' => 'about'));?></li>
-							<li><a href="./download.php?file=CGU.pdf">CGU</a></li>
-						</ul>
-					</div>
-				</nav>
-			</footer>
-			<?php echo $this->Html->script(array(
-				'datepicker.js',
-				'jquery.inputfile',
-				'loader',
-				'script'
-				));?>
-				<!-- Print out cached javascripts -->
-				<?php echo $this->Js->writeBuffer(); ?>
-			</body>
-			</html>
+							array('controller' => 'home', 'action' => 'about'));?>
+						</li>
+						<li><?php echo $this->Html->link('CGU',
+						array('controller' => 'home', 'action' => 'cgu'));?>
+					</li>
+				</ul>
+			</div>
+		</nav>
+	</footer>
+	<?php echo $this->Html->script(array(
+		'datepicker.js',
+		'jquery.inputfile',
+		'loader',
+		'script'
+		));?>
+		<!-- Print out cached javascripts -->
+		<?php echo $this->Js->writeBuffer(); ?>
+	</body>
+	</html>
