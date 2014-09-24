@@ -20,7 +20,7 @@ class Applicant extends AppModel {
 			App::uses('CakeEmail', 'Network/Email');
 			$mail = (FULL_BASE_URL == 'http://localhost:82') ? new CakeEmail('gmail') : new CakeEmail();
 			$mail->to(array('khatal.yacine@gmail.com','testscientiweb5@gmail.com')) //$mail->to($data['email'])
-			->from('no-replay@scientipole.org')
+			->from('no-reply@scientipole-initiative.org')
 			->subject('Scientibox login')
 			->emailFormat('html')
 			->template('applicant_signup')

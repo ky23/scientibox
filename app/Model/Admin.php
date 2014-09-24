@@ -33,7 +33,7 @@ class Admin extends AppModel {
 			App::uses('CakeEmail', 'Network/Email');
 			$mail = (FULL_BASE_URL == 'http://localhost:82') ? new CakeEmail('gmail') : new CakeEmail();
 			$mail->to($data['Admin']['username'])
-			->from('no-replay@scientipole.org')
+			->from('no-reply@scientipole-initiative.org')
 			->subject($subject)
 			->emailFormat('html')
 			->template($template)

@@ -54,7 +54,7 @@ class CompaniesController extends AppController {
 				}
 			}
 		} else {
-			return $this->redirect(array('controller' => 'main', 'action' => 'index'));
+			return $this->redirect(array('controller' => 'home', 'action' => 'index'));
 		}
 	}
 
@@ -148,7 +148,7 @@ class CompaniesController extends AppController {
 			$this->set('dates', $dateObject);
 			return;
 		} else {
-			return $this->redirect(array('controller' => 'main', 'action' => 'index'));
+			return $this->redirect(array('controller' => 'home', 'action' => 'index'));
 		}
 	}
 }

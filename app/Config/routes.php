@@ -31,8 +31,8 @@
  * ...and connect the rest of 'Pages' controller's URLs.
  */
 	Router::connect('/pages/*', array('controller' => 'pages', 'action' => 'display'));
-	Router::connect('/', array('controller' => 'main', 'action' => 'index'));
-	Router::connect('/img/captcha.jpg', array('controller' => 'contact', 'action' => 'captcha'));
+	Router::connect('/', array('controller' => 'home', 'action' => 'index'));
+	Router::connect('/img/captcha.jpg', array('controller' => 'home', 'action' => 'captcha'));
 /**
  * Load all plugin routes. See the CakePlugin documentation on
  * how to customize the loading of plugin routes.

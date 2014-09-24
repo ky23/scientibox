@@ -64,22 +64,22 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 					<div class="logo">
 						<?php 
 						echo $this->Html->link($this->Html->image('logo.png', array('alt' => 'smse logo', 'border' => '0')),
-							array('controller' => 'main', 'action' => 'index'), array('target' => '_self', 'escape' => false, 'id' => 'logo'));
+							array('controller' => 'home', 'action' => 'index'), array('target' => '_self', 'escape' => false, 'id' => 'logo'));
 							?>
 							<h2>Scientibox</h2>
 						</div> <!-- end of logo -->
 					</div> <!-- end of navbar-collapse -->
 					<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 						<ul class="nav navbar-nav">
-							<li class="<?php echo (!empty($this->params['action']) && ($this->params['action'] == 'index') && $this->params['controller'] == 'main')?'active' :'inactive' ?>">
+							<li class="<?php echo (!empty($this->params['action']) && ($this->params['action'] == 'index') && $this->params['controller'] == 'home') ? 'active' : 'inactive' ?>">
 								<?php echo $this->Html->link('Accueil',
-								array('controller' => 'main', 'action' => 'index'));?>
-								<div class="trapez1" style="visibility: <?php echo (!empty($this->params['action']) && ($this->params['action'] == 'index') && $this->params['controller'] == 'main')?'visible' :'hidden' ?>"></div>
+								array('controller' => 'home', 'action' => 'index'));?>
+								<div class="trapez1" style="visibility: <?php echo (!empty($this->params['action']) && ($this->params['action'] == 'index') && $this->params['controller'] == 'home') ? 'visible' : 'hidden' ?>"></div>
 							</li>
 							<li><a href="#">Comment ça marche?</a></li>
-							<li class="<?php echo (!empty($this->params['action']) && ($this->params['action'] == 'index') && $this->params['controller'] == 'contact')?'active' :'inactive' ?>">
+							<li class="<?php echo (!empty($this->params['action']) && ($this->params['action'] == 'contact') && $this->params['controller'] == 'home') ? 'active' : 'inactive' ?>">
 								<?php echo $this->Html->link('Nous contacter',
-								array('controller' => 'contact', 'action' => 'index'));?>
+								array('controller' => 'home', 'action' => 'contact'));?>
 								<div class="trapez3" style="visibility: <?php echo (!empty($this->params['action']) && ($this->params['action'] == 'index') && $this->params['controller'] == 'contact')?'visible' :'hidden' ?>"></div>
 							</li>
 						</ul>
@@ -110,9 +110,9 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 				<div class="container">
 					<p>&copy;2014 - Copyright Scientipôle Initiative.</p>
 					<ul class="footer-brand">
-						<li class="<?php echo (!empty($this->params['action']) && ($this->params['action'] == 'index') && $this->params['controller'] == 'about')?'active' :'inactive' ?>">
+						<li class="<?php echo (!empty($this->params['action']) && ($this->params['action'] == 'about') && $this->params['controller'] == 'main') ? 'active' : 'inactive' ?>">
 							<?php echo $this->Html->link('A propos',
-							array('controller' => 'about', 'action' => 'index'));?></li>
+							array('controller' => 'home', 'action' => 'about'));?></li>
 							<li><a href="./download.php?file=CGU.pdf">CGU</a></li>
 						</ul>
 					</div>

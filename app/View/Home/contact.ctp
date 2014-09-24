@@ -1,5 +1,4 @@
  <!-- File: /app/View/Contact/index.ctp -->
- 
  <?php
  $key = md5(uniqid(rand(), true));
  CakeSession::write('Contact.key', $key);
@@ -36,7 +35,7 @@
             </div> <!-- end of controls -->
         </div> <!-- end of control-group -->   
         <div class="control-group">
-         <div class="controls">
+           <div class="controls">
             <span class="glyphicon glyphicon-pencil"></span>
             <textarea rows="8" cols="100" class="form-control" id="message" name="message" placeholder="Message" maxlength="999" style="resize:none" required></textarea>
         </div> <!-- end of controls -->

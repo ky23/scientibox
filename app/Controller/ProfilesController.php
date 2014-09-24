@@ -38,7 +38,7 @@ class ProfilesController extends AppController {
 				}
 			}
 		} else {
-			return $this->redirect(array('controller' => 'main', 'action' => 'index'));
+			return $this->redirect(array('controller' => 'home', 'action' => 'index'));
 		}
 	}
 
@@ -90,7 +90,7 @@ class ProfilesController extends AppController {
 			$applicants = $this->Applicant->find('all', array('conditions' => array('company_id' => $applicant['Company']['id'])));
 			$this->set('applicants', $applicants);
 		} else {
-			return $this->redirect(array('controller' => 'main', 'action' => 'index'));
+			return $this->redirect(array('controller' => 'home', 'action' => 'index'));
 		}
 	}
 }

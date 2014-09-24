@@ -20,13 +20,13 @@ class ApplicantsController extends AppController {
 					return $this->redirect(array('controller' => 'companies', 'action' => 'edit_company'));
 				} else {
 					$this->Session->setFlash('Votre compte a expiré.', 'flash_error');
-					return $this->redirect(array('controller' => 'main', 'action' => 'index'));
+					return $this->redirect(array('controller' => 'home', 'action' => 'index'));
 				}
 			} else {
-				return $this->redirect(array('controller' => 'main', 'action' => 'index'));
+				return $this->redirect(array('controller' => 'home', 'action' => 'index'));
 			}
 		} else {
-			return $this->redirect(array('controller' => 'main', 'action' => 'index'));
+			return $this->redirect(array('controller' => 'home', 'action' => 'index'));
 		}
 	}
 
@@ -73,12 +73,12 @@ class ApplicantsController extends AppController {
 				}
 			}
 		}
-		return $this->redirect(array('controller' => 'main', 'action' => 'index'));
+		return $this->redirect(array('controller' => 'home', 'action' => 'index'));
 	}
 
 	public function logout() {
 		$this->Session->delete('Applicant');
-		return $this->redirect(array('controller' => 'main', 'action' => 'index'));
+		return $this->redirect(array('controller' => 'home', 'action' => 'index'));
 	}
 
 	private function checkTokenValidity($date) {
