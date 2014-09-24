@@ -37,58 +37,37 @@ li>a {
 	font-size: 16px;
 }
 
-li.active>a,
-li>a:hover,
-li.active>a:hover {
-	background-color: transparent;
-	color: #00313b;
-}
-
 /*-----------------------------------------
 				Header
 -------------------------------------------*/
 .navbar-default {
-	height: 80px;
+	height: 40px;
 	background-color: #047f8d;
 }
 
 .navbar-header {
 	margin-left: 30px;
-	margin-right: 300px;
-}
-
-.logo {
-	width: 250px;
-	height: 80px;
-	float: left;
-	display: inline;
 }
 
 .logo h2 {
-	margin-top: 35px;
+	margin-top: 20px;
 	font-size: 20px;
 	color: white; 
-	float: left; 
+	float: left;
+	margin-right: 100px;
 }
 
 .logo img {
-	margin: 15px 10px;
-	float: left; 
-}
-
-.navbar-nav {
-	background-color: transparent;
+	margin: 10px;
 	float: left;
-	margin-top: 16px;
-}
-
-.navbar-default .navbar-nav li {
-	position: relative;
+	height: 30px;
+	width: auto;
 }
 
 .navbar-default .navbar-nav>li>a {
 	color: white;
 	font-size: 16px;
+	height: 40px;
 }
 
 .navbar-default .navbar-nav>li.active>a,
@@ -100,40 +79,39 @@ li.active>a:hover {
 
 .trapez1, .trapez3 {
 	position: absolute;
-	top: 55px;
-	width: 20px; 
+	top: 45px;
+	width: 10px; 
 	height: 0px; 
-	border-bottom: 15px solid #ffffff;
-	border-left: 15px solid transparent;
-	border-right: 15px solid transparent;
+	border-bottom: 5px solid #ffffff;
+	border-left: 5px solid transparent;
+	border-right: 5px solid transparent;
 }
 
 .trapez1 {
-	left: 25px;
+	left: 35px;
 }
 
 .trapez3 {
-	left: 50px;
+	left: 58px;
 }
 
 .navbar-default .navbar-toggle {
-	position: absolute;
-	top: 10px;
-	right: 5px;
-	width: 35px;
-	height: 35px;
+	width: 34px;
+	height: 34px;
 	background-color: #00313b;
 	border: none;
-}
-
-.navbar-default .glyphicon-align-justify {
-	color: white;
-	font-size: 16px;
+	margin-left: 2px;
 }
 
 .navbar-default .navbar-toggle:hover, 
 .navbar-default .navbar-toggle:focus {
 	background-color: #00313b;
+}
+
+@media only screen and (max-width: 320px) {
+	.logo h2 {
+		display: none;
+	}
 }
 
 @media only screen and (max-width: 800px) {
@@ -142,7 +120,6 @@ li.active>a:hover {
 		border-top: none;
 		padding: 0px 0px 0px 30px;
 		box-shadow: none;
-		z-index: -500;
 	}
 
 	.logo h3 span {
@@ -150,7 +127,7 @@ li.active>a:hover {
 		color: white;
 	}
 
-	.trapez {
+	.trapez1, .trapez3 {
 		display: none;
 	}
 
@@ -172,17 +149,94 @@ li.active>a:hover {
 }
 
 /*-----------------------------------------
+				  Footer
+-------------------------------------------*/
+.navbar-default.navbar-fixed-bottom {
+	height: 25px;
+	margin-top: 5px;
+	min-height: 20px;
+}
+
+.footer-brand {
+	background-color: transparent;
+}
+
+footer .container ul li {
+	margin-right: 10px;
+	display: inline;
+}
+
+footer .container ul {
+	list-style: none;
+}
+
+footer ul li a:hover {
+	color: #00313b;
+	text-decoration: none;
+}
+
+footer ul li a {
+	display: inline;
+	font-size: 14px;
+	color: white;
+}
+
+footer p {
+	float: left;
+	background-color: transparent;
+	color : white;
+	font-size: 12px;
+	margin: 5px 200px 5px 15px;
+}
+
+@media only screen and (max-width: 800px) {
+	.navbar-default.navbar-fixed-bottom {
+		height: 50px;
+		margin-top: 5px;
+		min-height: 20px;
+	}
+
+	footer .container ul li {
+		margin-right: 10px;
+	}
+
+	.container ul {
+		margin-left: 15px;
+	}
+
+	.container ul li {
+		margin-right: 5px;
+	}
+
+	footer ul li a {
+		font-size: 10px;
+	}
+
+	footer p {
+		margin-left: 10px;
+		font-size: 8px;
+		margin: 5px 60px 0px 15px;
+	}
+}
+
+
+/*-----------------------------------------
 	 administration form
 -------------------------------------------*/
 .btn-group {
-	position: absolute;
+	/*position: absolute;
 	top: 0px;
-	right: 6px;
+	right: 6px;*/
+}
+
+.navbar-default .glyphicon-align-justify {
+	color: white;
+	font-size: 16px;
 }
 
 #admin-button {
 	position: absolute;
-	top: 18px;
+	top: 7px;
 	right: 51px;
 	width: 80px;
 	height: 35px;
@@ -333,19 +387,6 @@ li.active>a:hover {
 	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
-/*.wrap,*/
-.wrap-forgotten {
-	position: absolute;
-	top: 180px;
-	left: 0px;
-	width: 400px;
-	text-align: center;
-}
-
-.wrap-forgotten {
-	top: 110px;
-}
-
 #button-login, 
 #button-send {
 	position: absolute;
@@ -360,7 +401,6 @@ li.active>a:hover {
 	background-color: #00313b	;
 	border-color: transparent;
 }
-
 
 #button-send {
 	top: 120px;
@@ -410,6 +450,7 @@ li.active>a:hover {
 -------------------------------------------*/
 #button-connexion, #button-connexion:hover {
 	margin-top: 20px;
+	margin-bottom: 60px;
 	float: left;
 	width: 150px;
 	height: 40px;
@@ -491,229 +532,133 @@ li.active>a:hover {
 	margin-bottom: 20px;
 }
 
+#send-button,
+#send-button:active,
+#send-button:hover,
 #close-button,
 #close-button:active,
-#close-button:hover {
+#close-button:hover  {
 	border-radius: 5px;
 	-webkit-border-radius: 5px;
-	background-color: #c22b3c;
 	border-color: transparent;
 	color: white;
 	border: none;
 	float: left;
+}
+
+#close-button,
+#close-button:active,
+#close-button:hover {
+	background-color: #c22b3c;
 	margin-right: 5px;
 }
 
 #send-button,
 #send-button:active,
 #send-button:hover {
-	border-radius: 5px;
-	-webkit-border-radius: 5px;
 	background-color: #2bc259;
-	border-color: transparent;
-	color: white;
-	border: none;
-	float: left;
-}
-
-.modal-footer {
-	width: 100% !important;
-	text-align: center;
-	color: white;
-}
-
-.flash-message {
-	width: 100% !important;
-	text-align: center;
 }
 
 @media only screen and (max-width: 800px) {
+	.modal {
+		text-align: center;
+	}
+
 	#username {
 		top: 0px;
 		right: 35px;
 	}
 
 	.modal .glyphicon {
-		top: 0px;
-		right: 234px;
-	}
-}
-
-/*-----------------------------------------
-				  Footer
--------------------------------------------*/
-.navbar-default.navbar-fixed-bottom {
-	height: 40px;
-	margin-top: 5px;
-}
-
-.footer-brand {
-	background-color: transparent;
-}
-
-footer .container ul li {
-	margin-right: 25px;
-}
-
-footer .container ul {
-	margin-left: 600px;
-}
-
-footer ul li a:hover {
-	color: #00313b;
-	text-decoration: none;
-}
-
-footer ul li, a {
-	display: inline;
-	font-size: 14px;
-	color: white;
-}
-
-footer p {
-	float: left;
-	background-color: transparent;
-	color : white;
-	font-size: 12px;
-	margin-left: 30px;
-}
-
-@media only screen and (max-width: 800px) {
-	.container ul {
-		margin-left: 220px;
-	}
-
-	.container ul li {
-		margin-right: 10px;
-	}
-
-	footer ul li, a {
-		display: inline;
-		font-size: 10px;
-		color: white;
-	}
-
-	footer p {
-		margin-top: 5px;
-		margin-left: 10px;
-		font-size: 10px;
+		/*top: 0px;
+		right: 234px;*/
 	}
 }
 
 /*-----------------------------------------
 				Contact form
 -------------------------------------------*/
-.span4 {
-	width: 100% !important;
-	text-align: center;	
-}
-
-#Contact {
-	position: relative;
-	top: 100px;
-	left: 320px;
-	width: 400px;
-	height: 500px;
+.contact-form {
+	width: 40%;
+	min-height: 480px;
 	background-color: #047f8d;
 	border-radius: 10px;
 	-webkit-border-radius: 10px;
 	-moz-border-radius: 10px;
-	margin-bottom: 100px;
+	text-align: center;
+	margin-top: 65px;
+	margin: 65px auto auto auto;
+	padding: 5px;
+	padding-left: 5%;
+	padding-right: 5%;
 }
 
-#Contact .glyphicon {
-	height: 35px;
-	position: absolute;
-	right: 314px;
-	color: #424242;
-	background-color: rgba(255,255,255, 1);
-	border-radius: 5px 0 0 5px;
-	-webkit-border-radius: 5px 0 0 5px;
-	padding-left: 8px;
-	padding-right: 8px;
-	line-height: 35px;
-	border-right: solid 2px rgba(0,0,0,0.8);
+#Contact input {
+	margin: auto;
 }
 
-#Contact .form-control {
-	width: 260px;
-	height: 35px;
-	position: absolute;
-	right: 55px;
-	background-color: rgba(255,255,255, 1);
-	color: #424242;
-	border-radius: 0 5px 5px 0;
-	-webkit-border-radius: 0 5px 5px 0;
-	border: none;
-	padding-left: 5px;
-	line-height: 35px;
-	border-left: solid 1px rgba(255,255,255,0.8);
+#Contact h3 {
+	color: white;
 }
 
-#Contact .glyphicon-bookmark, #Contact #company {
-	top: 60px;
-}
-
-#Contact .glyphicon-user, #Contact #name {
-	top: 100px;
-}
-
-#Contact .glyphicon-envelope, #Contact #email {
-	top: 140px;
-}
-
-#Contact .glyphicon-tag, #Contact #subject {
-	top: 180px;
-}
-
-#Contact .glyphicon-picture, #Contact #captcha-input {
-	top: 390px;
-}
-
-#Contact .glyphicon-pencil, #Contact #message {
-	top: 220px;
-	height: 100px !important;
-	padding-top: 25px;
-	line-height: 35px;
-}
-
-#Contact #captcha {
-	position: absolute;
-	top: 325px;
-	left: 55px;
-}
-
-#Contact #reload {
-	position: absolute;
-	top: 345px;
-	left: 200px;
-}
-
+#Contact #reload,
 #Contact #reload:hover {
+	margin-left: 5px;
 	text-decoration: none;
 	color: white;
 }
 
-#Contact #send-button {
-	position: absolute;
-	top: 460px;
-	right: 160px;
-	background-color: #00313b;
-	color: white;
-	border: none;
+#Contact .input-group {
+	margin-bottom: 5px;
 }
 
-#Contact .wrap {
-	position: absolute;
-	top: 430px;
-	/*left: 90px;*/
+.input-group .input-group-addon {
+     line-height: 1!important;
+ }
+
+#Contact .glyphicon,
+#Contact .input-group-addon {
+	top: 0;
+	height: 35px;
+	color: #00313b;
+	background-color: rgba(255,255,255, 1);
+	border-radius: 5px 0 0 5px;
+	-webkit-border-radius: 5px 0 0 5px;
+	padding: 0px 8px;
+	line-height: 35px;
+}
+
+#Contact .form-control {
+	width: 100%;
+	height: 35px;
+	background-color: rgba(255,255,255, 1);
+	color: #424242;
+	border-radius: 0 5px 5px 0;
+	-webkit-border-radius: 0 5px 5px 0;
+	padding: 0px 8px;
+}
+
+#Contact textarea {
+  height: 100px; 
+  min-height: 100px;  
+  max-height: 100px;
+}
+
+#Contact #captcha {
+	margin-bottom: 5px;
+}
+
+#Contact #contact-button {
+	background-color: #00313b;
+	color: white;
 }
 
 @media only screen and (max-width: 800px) {
-	#Contact {
-		left: -35px;
+	.contact-form {
+		width: 100%;
 	}
 }
+
 
 /*-----------------------------------------
 				About
@@ -1252,7 +1197,7 @@ input.error {
 	-webkit-border-radius: 8px 8px 8px 8px;
 	font-size: 15px;
 	padding: 3px 0;
-	margin-top: 60px;
+	margin-top: 25px;
 }
 
 #success {
