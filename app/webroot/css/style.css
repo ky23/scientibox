@@ -38,6 +38,79 @@ li>a {
 }
 
 /*-----------------------------------------
+					forms
+-------------------------------------------*/
+.form {
+	width: 40%;
+	background-color: #047f8d;
+	border-radius: 10px;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	text-align: center;
+	margin-top: 65px;
+	margin: 20px auto auto auto;
+	padding: 5px;
+	padding-left: 5%;
+	padding-right: 5%;
+}
+
+.form .form-title {
+	margin-bottom: 20px;
+	color: white;
+}
+
+.form .glyphicon,
+.form .input-group-addon {
+	top: 0;
+	height: 35px;
+	color: #00313b;
+	background-color: rgba(255,255,255, 1);
+	border-radius: 5px 0 0 5px;
+	-webkit-border-radius: 5px 0 0 5px;
+	padding: 0px 8px;
+	line-height: 35px;
+}
+
+.form.admin .form-control,
+.form.contact .form-control,
+.form.forgot .form-control {
+	width: 100%;
+	height: 35px;
+	background-color: rgba(255,255,255, 1);
+	color: #424242;
+	border-radius: 0 5px 5px 0;
+	-webkit-border-radius: 0 5px 5px 0;
+	padding: 0px 8px;
+}
+
+.form .input-group {
+	margin-bottom: 5px;
+}
+
+.form .input-group .input-group-addon {
+     line-height: 1!important;
+}
+
+.form .form-button,
+.form .form-button:hover,
+.form .form-button:active {
+	color: white;
+	margin-top: 5px;
+	margin-bottom: 15px;
+	min-width: 150px;
+	height: 40px;
+	padding: 10px;
+	background-color: #00313b;
+	border-color: transparent;
+}
+
+@media only screen and (max-width: 800px) {
+	.form {
+		width: 100%;
+	}
+}
+
+/*-----------------------------------------
 				Header
 -------------------------------------------*/
 .navbar-default {
@@ -223,17 +296,6 @@ footer p {
 /*-----------------------------------------
 	 administration form
 -------------------------------------------*/
-.btn-group {
-	/*position: absolute;
-	top: 0px;
-	right: 6px;*/
-}
-
-.navbar-default .glyphicon-align-justify {
-	color: white;
-	font-size: 16px;
-}
-
 #admin-button {
 	position: absolute;
 	top: 7px;
@@ -248,30 +310,24 @@ footer p {
 	-webkit-border-radius: 5px solid #00313b;
 }
 
-.admin-connexion,
-.admin-forgotten {
-	position: absolute;
-	top: 150px;
-	left: 420px;
-	width: 420px;
-	min-height: 280px;
-	background-color: #047f8d;
-	border-radius: 10px;
-	-webkit-border-radius: 10px;
-	-moz-border-radius: 10px;
+.navbar-default .glyphicon-align-justify {
+	color: white;
+	font-size: 16px;
 }
 
-.admin-forgotten {
+.admin.form {
+	min-height: 250px;
+}
+
+.forgot-form {
 	min-height: 200px;
 }
 
-.form-title {
-	position: absolute;
-	width: 100% !important;
-	top: 5px;
-	right: 0px;
+#admin #forgot,
+#admin #forgot:hover {
+	margin-left: 5px;
+	text-decoration: none;
 	color: white;
-	text-align: center;
 }
 
 #logged-out {
@@ -312,104 +368,6 @@ footer p {
 
 #logged-out .glyphicon-off {
 	top: 70px;
-}
-
-.admin-connexion .glyphicon,
-.admin-forgotten .glyphicon {
-	position: absolute;
-	right: 319px;
-	height: 35px;
-	line-height: 35px;
-	color: #424242;
-	background-color: rgba(255,255,255, 1);
-	border-radius: 5px 0 0 5px;
-	-webkit-border-radius: 5px 0 0 5px;
-	padding-left: 8px;
-	padding-right: 8px;
-	border-right: solid 2px rgba(0,0,0,0.8);
-}
-
-.admin-connexion #email, 
-.admin-connexion #password, 
-.admin-connexion #password-confirm,
-.admin-forgotten #email, 
-.admin-forgotten #password, 
-.admin-forgotten #password-confirm  {
-	position: absolute;
-	right: 70px;
-	width: 250px;
-	height: 35px;
-	line-height: 35px;
-	color: #424242;
-	background-color: rgba(255,255,255, 1);
-	border-radius: 0 5px 5px 0;
-	-webkit-border-radius: 0 5px 5px 0;
-	border-color: transparent;
-	margin-left: -5px;
-} 
-
-.admin-connexion  .glyphicon-user,
-.admin-connexion  #email,
-.admin-forgotten  .glyphicon-user,
-.admin-forgotten  #email   {
-	top: 60px;
-}
-
-.admin-connexion  .glyphicon-lock,
-.admin-connexion  #password,
-.admin-forgotten  .glyphicon-lock,
-.admin-forgotten  #password  {
-	top: 100px;
-}
-
-.admin-connexion  #lock,
-.admin-connexion  #password-confirm,
-.admin-forgotten  #lock,
-.admin-connexion  #password-confirm  {
-	top: 140px;
-}
-
-.remember {
-	position: absolute;
-	top: 150px;
-	right: 150px;
-	color: white;
-	font-size: 14px;
-	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-}
-
-.forgotten {
-	position: absolute;
-	top: 140px;
-	right: 200px;
-	color: white;
-	font-size: 14px;
-	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-}
-
-#button-login, 
-#button-send {
-	position: absolute;
-	top: 200px;
-	right: 130px;
-	color: white;
-	margin-top: 20px;
-	float: left;
-	width: 150px;
-	height: 40px;
-	padding: 10px;
-	background-color: #00313b	;
-	border-color: transparent;
-}
-
-#button-send {
-	top: 120px;
-}
-
-@media only screen and (max-width: 800px) {
-	.admin-connexion {
-		left: 0px;
-	}
 }
 
 /*-----------------------------------------
@@ -578,87 +536,30 @@ footer p {
 /*-----------------------------------------
 				Contact form
 -------------------------------------------*/
-.contact-form {
-	width: 40%;
+.contact.form {
 	min-height: 480px;
-	background-color: #047f8d;
-	border-radius: 10px;
-	-webkit-border-radius: 10px;
-	-moz-border-radius: 10px;
-	text-align: center;
-	margin-top: 65px;
-	margin: 65px auto auto auto;
-	padding: 5px;
-	padding-left: 5%;
-	padding-right: 5%;
 }
 
-#Contact input {
-	margin: auto;
-}
-
-#Contact h3 {
-	color: white;
-}
-
-#Contact #reload,
-#Contact #reload:hover {
+#contact #reload,
+#contact #reload:hover {
 	margin-left: 5px;
 	text-decoration: none;
 	color: white;
 }
 
-#Contact .input-group {
-	margin-bottom: 5px;
-}
-
-.input-group .input-group-addon {
-     line-height: 1!important;
- }
-
-#Contact .glyphicon,
-#Contact .input-group-addon {
-	top: 0;
-	height: 35px;
-	color: #00313b;
-	background-color: rgba(255,255,255, 1);
-	border-radius: 5px 0 0 5px;
-	-webkit-border-radius: 5px 0 0 5px;
-	padding: 0px 8px;
-	line-height: 35px;
-}
-
-#Contact .form-control {
-	width: 100%;
-	height: 35px;
-	background-color: rgba(255,255,255, 1);
-	color: #424242;
-	border-radius: 0 5px 5px 0;
-	-webkit-border-radius: 0 5px 5px 0;
-	padding: 0px 8px;
-}
-
-#Contact textarea {
+#contact textarea {
   height: 100px; 
   min-height: 100px;  
   max-height: 100px;
 }
 
-#Contact #captcha {
+#contact #captcha {
 	margin-bottom: 5px;
 }
 
-#Contact #contact-button {
-	background-color: #00313b;
-	color: white;
+.contact.form .form-button {
+	margin-top: -20px
 }
-
-@media only screen and (max-width: 800px) {
-	.contact-form {
-		width: 100%;
-	}
-}
-
 
 /*-----------------------------------------
 				About
