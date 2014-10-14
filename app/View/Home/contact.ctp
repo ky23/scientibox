@@ -5,14 +5,14 @@
  ?>
  <div class="container"> 
     <div class="row-fluid"> 
-        <div class="contact-form">
+        <div class="contact form">
             <?php echo $this->Form->create('Contact', array(
-                'id' => 'Contact',
+                'id' => 'contact',
                 'class' => 'form-horizontal'
                 ));?>
-                <section> 
+                <section>
                     <div class="control-group"> 
-                        <h3>Nous contacter</h3>
+                        <h3 class="form-title">Nous contacter</h3>
                     </div> <!-- end of form-title -->
                     <div class="control-group">
                         <div class="input-group">
@@ -49,7 +49,7 @@
                                     'id' => 'email'
                                     )); ?>
                                 </div> <!-- end of input-group -->
-                            </div> <!-- end of control-group -->  
+                            </div> <!-- end of control-group --> 
                             <div class="control-group">
                                 <div class="input-group">
                                     <span class="input-group-addon glyphicon glyphicon-tag"></span>
@@ -61,13 +61,13 @@
                                       'id' => 'subject',
                                       'options' => array(
                                         'FB' => 'Feedback',
-                                        'PA' => ' Problème d\'accès',
+                                        'PA' => 'Problème d\'accès',
                                         'CT' => 'Contact'
                                         ))); ?>
                                     </div> <!-- end of input-group -->
                                 </div> <!-- end of control-group -->   
                                 <div class="control-group">
-                                 <div class="input-group">
+                                   <div class="input-group">
                                     <span class="input-group-addon glyphicon glyphicon-pencil"></span>
                                     <?php echo $this->Form->input('message', array(
                                       'type' => 'textarea',
@@ -102,13 +102,12 @@
                                     echo '</div> <!-- end of input-group -->';
                                 }
                                 ?>
-                                
                             </div> <!-- end of controls -->        
                             <input type="text" style="visibility: hidden" id="key" name="key" value="<?php echo $key;?>"/>
                             <?php echo $this->Form->end(array(
                                 'value' => 'Envoyer',
                                 'label' => 'Envoyer',
-                                'id' => 'contact-button'
+                                'class' => 'form-button'
                                 ));?>
                             </section> 
                         </div> <!-- end of contact-form -->

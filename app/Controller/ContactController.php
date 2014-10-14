@@ -1,7 +1,7 @@
 <?php
 
-class HomeController extends AppController {
-	public $name = 'Home';
+class ContactController extends AppController {
+	var $name = 'Contact';
 	public $captchas = array('captcha');
 	public $components = array(
 		'Captcha' => array(
@@ -15,42 +15,40 @@ class HomeController extends AppController {
 
 	function beforeFilter() {
 		parent::beforeFilter();
-		$this->Auth->allow(array('index', 'contact', 'about', 'captcha', 'cgu'));
-	}
-	
-	public function index() {
-		return;
+		$this->Auth->allow('index', 'captcha');
 	}
 
-	public function contact() {
-		$this->loadModel('Contact');
+	public function index() {
+		// echo "<script>console.log( 'session: " . $this->Session->read('Contact.key') . "' );</script>";
+		// echo "<script>console.log( 'key    : " . $this->request->data['key'] . "' );</script>";
+
 		$this->Session->delete('Message.flash');
 		if ($this->request->is('post')) {
 			if ($this->Session->check('Contact.key') && strcasecmp($this->Session->read('Contact.key'), $this->request->data['key']) === 0) {
 				foreach($this->captchas as $field) {
-					$this->Contact->setCaptcha($field, $this->Captcha->getCode($field));
+					$this->Contact->setCaptcha($field,
+						$this->Captcha->getCode($field));
 				}
 				$this->Contact->set($this->request->data);
 				if ($this->Contact->validates()) {
 					if ($this->Contact->send($this->request->data)) {
-						$this->Session->setFlash('Votre message a bien été envoyé', 'flash_success');
+						$this->Session->setFlash('Votre message a bien été envoyé', 'ok');
 						$this->request->data = array();
 					} else {
-						$this->Session->setFlash('Votre message n\'a pas pu être envoyé', 'flash_error');
+						$this->Session->setFlash('Votre message n\'a pas pu être envoyé', 'ko');
 					}
 					$this->Session->delete('key');
 				} else {
-					$this->Session->setFlash($this->Contact->validationErrors[0]['captcha'], 'flash_error');
+					$this->Session->setFlash($this->Contact->validationErrors['captcha'], 'ko');
 				}
 			} else {
-				$this->Session->setFlash('Votre message a déja été envoyé', 'flash_success');
+				$this->Session->setFlash('Votre message a déja été envoyé', 'ok');
 			}
 		}
 		$this->set('captcha_fields', $this->captchas);
 	}
 
 	public function captcha()  {
-		$this->loadModel('Contact');
 		$this->autoRender = false;
 
         // Retrieve the basename for the image route so that we can
@@ -59,15 +57,6 @@ class HomeController extends AppController {
 
         /// Generate actual captcha image (each image unique per image route)
 		$this->Captcha->generate($captcha);
-	}
-
-	public function about() {
-		return;
-	}
-
-	public function cgu() {
-		$this->autoRender = false;
-		return;
 	}
 }
 
