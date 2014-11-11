@@ -38,4 +38,9 @@
 		$('#event_date').datepicker({
 			minDate: 0
 		});
+
+		$('#report_date').datepicker({
+			minDate: "-2y",
+			maxDate: "+2y"
+		});
 	});

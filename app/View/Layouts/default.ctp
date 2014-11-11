@@ -44,7 +44,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 		'jquery-ui.min',
 		'jquery-ui.structure.min',
 		'jquery-ui.theme.min',
-		'style'
+		'style',
 		));
 	echo $this->Html->meta('icon');
 	echo $this->fetch('meta');

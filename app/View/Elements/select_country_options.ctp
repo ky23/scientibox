@@ -1,11 +1,12 @@
 
 <?php echo $this->Form->input('birth_country', array(
 	'type' => 'select',
-	'label' => false,
+	'label' => 'Pays de naissance : <span class="glyphicon glyphicon-asterisk required"/>',
 	'class' => 'form-control',
 	'placeholder' => 'Pays de naissance',
 	'id' => 'birth_country',
-	'value' =>  ($applicant_to_edit['Profile']['birth_country']) ? $applicant_to_edit['Profile']['birth_country'] : 'Pays',
+	'default' => 'France',
+	// 'value' =>  ($applicant_to_edit['Profile']['birth_country']) ? $applicant_to_edit['Profile']['birth_country'] : 'Pays',
 	'options' => array(
 		'Afghanistan' => 'Afghanistan',
 		'Afrique_Centrale' => 'Afrique_Centrale',
