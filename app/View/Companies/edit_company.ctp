@@ -13,34 +13,34 @@
       <h3 class="span8 pull-left title">Infomations générales sur l'entreprise</h3>
     </div> <!-- end of form-group -->
     <div class="form-group">
-      <?php echo $this->Form->input('name', array(
+      <?php echo $this->Form->input('Company.name', array(
         'type' => 'text',
         'label' => 'Raison sociale : <span class="glyphicon glyphicon-asterisk required"/>',
         'class' => 'form-control',
         'placeholder' => 'Raison sociale de la société',
-        'id' => 'name',
+        'id' => 'name'
         )); ?>
       </div> <!-- end of form-group -->
       <div class="form-group">
-       <?php echo $this->Form->input('website', array(
+       <?php echo $this->Form->input('Company.website', array(
          'type' => 'text',
          'label' => 'Site web : <span class="glyphicon glyphicon-asterisk required"/>',
          'class' => 'form-control',
          'placeholder' => 'Site web de la société',
-         'id' => 'website',
+         'id' => 'website'
          )); ?>
        </div> <!-- end of form-group -->
        <div class="form-group">
-        <?php echo $this->Form->input('siren', array(
+        <?php echo $this->Form->input('Company.siren', array(
           'type' => 'text',
           'label' => 'Siren : <span class="glyphicon glyphicon-asterisk required"/>',
           'class' => 'form-control',
           'placeholder' => 'Siren de la société',
-          'id' => 'siren',
+          'id' => 'siren'
           )); ?>
         </div> <!-- end of form-group -->
         <div class="form-group">
-          <?php echo $this->Form->input('legal_status', array(
+          <?php echo $this->Form->input('Company.legal_status', array(
             'type' => 'select',
             'label' => 'Statut juridique : <span class="glyphicon glyphicon-asterisk required"/>',
             'class' => 'form-control',
@@ -57,78 +57,78 @@
               ))); ?>
             </div> <!-- end of form-group -->
             <div class="form-group" id="other">
-              <?php echo $this->Form->input('other', array(
+              <?php echo $this->Form->input('Company.other_status', array(
                 'type' => 'text',
                 'label' => 'Autre : <span class="glyphicon glyphicon-asterisk required"/>',
-                'id' => 'other-choice',
+                'id' => 'other_status',
                 'class' => 'form-control',
                 'placeholder' => 'Autre statut juridique'
                 )); ?>
               </div> <!-- end of form-group -->
               <div class="form-group">
-                <?php echo $this->Form->input('social_capital', array(
+                <?php echo $this->Form->input('Company.social_capital', array(
                   'type' => 'text',
                   'label' => 'Capital social : <span class="glyphicon glyphicon-asterisk required"/>',
                   'class' => 'form-control',
                   'placeholder' => 'Code Naf de la société',
-                  'id' => 'social_capital',
+                  'id' => 'social_capital'
                   )); ?>
                 </div> <!-- end of form-group -->
                 <div class="form-group">
-                  <?php echo $this->Form->input('contact', array(
+                  <?php echo $this->Form->input('Company.contact', array(
                     'type' => 'text',
                     'label' => 'Contact : <span class="glyphicon glyphicon-asterisk required"/>',
                     'class' => 'form-control',
                     'placeholder' => 'Email du contact principal',
-                    'id' => 'contact',
+                    'id' => 'contact'
                     )); ?>
                   </div> <!-- end of form-group -->
                   <div class="form-group">
-                   <?php echo $this->Form->input('creation_date', array(
+                   <?php echo $this->Form->input('Company.creation_date', array(
                      'type' => 'text',
                      'label' => 'Date de création : <span class="glyphicon glyphicon-asterisk required"/>',
                      'class' => 'form-control',
                      'placeholder' => 'jj/mm/aaaa',
-                     'id' => 'creation_date',
+                     'id' => 'creation_date'
                      )); ?>
                    </div> <!-- end of form-group -->
                    <div class="form-group">
                     <label class="col-sm-2  control-label">Adresse : <span class="glyphicon glyphicon-asterisk required"></span></label>
                     <div class="col-sm-3"> 
-                      <?php echo $this->Form->input('street_name', array(
+                      <?php echo $this->Form->input('Company.street_name', array(
                        'type' => 'text',
                        'label' => 'Rue/Bd/Av',
                        'class' => 'form-control',
                        'placeholder' => 'Nom de la Rue/Bd/Av',
-                       'id' => 'street_name',
+                       'id' => 'street_name'
                        )); ?> 
                      </div> <!-- end of col-sm-3 -->
                      <div class="col-sm-2"> 
-                       <?php echo $this->Form->input('zip_code', array(
+                       <?php echo $this->Form->input('Company.zip_code', array(
                          'type' => 'text',
                          'label' => 'Code postal',
                          'class' => 'form-control',
                          'placeholder' => 'Code postal',
-                         'id' => 'zip_code',
+                         'id' => 'zip_code'
                          )); ?> 
                        </div> <!-- end of col-sm-2 -->
                        <div class="col-sm-3"> 
-                        <?php echo $this->Form->input('city_name', array(
+                        <?php echo $this->Form->input('Company.city_name', array(
                          'type' => 'text',
                          'label' => 'Ville',
                          'class' => 'form-control',
                          'placeholder' => 'Nom de la ville',
-                         'id' => 'city_name',
+                         'id' => 'city_name'
                          )); ?>  
                        </div> <!-- end of col-sm-3 -->
                      </div> <!-- end of form-group -->
                      <div class="form-group">
-                      <?php echo $this->Form->input('activity', array(
+                      <?php echo $this->Form->input('Company.activity', array(
                         'type' => 'textarea',
                         'label' => 'Activité (tel que mentionné dans le Kbis) : <span class="glyphicon glyphicon-asterisk required"/>',
                         'class' => 'form-control',
                         'placeholder' => 'Activité de la société',
-                        'id' => 'activity',
+                        'id' => 'activity'
                         )); ?>
                       </div> <!-- end of form-group -->
                       <div class="form-group">
@@ -145,12 +145,12 @@
                         <h3 class="span8 pull-left title">Structure du capital </h3> 
                       </div> <!-- end of form-group -->
                       <div class="form-group">
-                       <?php echo $this->Form->input('total_shares', array(
+                       <?php echo $this->Form->input('Company.total_shares', array(
                          'type' => 'text',
                          'label' => 'Nombre de parts totales : <span class="glyphicon glyphicon-asterisk required"/>',
                          'class' => 'form-control',
                          'placeholder' => 'Nombre d\'actions total',
-                         'id' => 'total_shares',
+                         'id' => 'total_shares'
                          )); ?>
                        </div> <!-- end of form-group -->
                        <div class="form-group">
@@ -166,30 +166,31 @@
                           <tbody>
                             <?php foreach ($applicants as $ind => $applicant): ?> 
                             <tr class="<?php echo ($ind % 2) ? 'colored' : 'uncolored' ?>">
-                             <td><?php echo ($applicant['Profile']['first_name']." ".$applicant['Profile']['last_name'])?></td>
+                             <td><?php echo ($applicant['Profile']['first_name'] . " " . $applicant['Profile']['last_name'])?></td>
                              <td>
-                              <?php echo $this->Form->input('shares_' . $applicant['Profile']['id'], array(
+                              <?php echo $this->Form->input('Profile.' . $applicant['Profile']['id'] . '.shares', array(
                                'type' => 'text',
                                'label' => false,
                                'class' => 'form-control',
                                'placeholder' => 'Nombre d\'actions total',
-                               'id' => 'shares_' . $applicant['Profile']['id'],
-                                 // 'value' =>  $applicant['Profile']['shares']
+                               'id' => 'shares_' . $applicant['Profile']['id']
                                )); ?>
                              </td>
-                             <td><?php 
-                             if ($company_to_edit['total_shares']) {
-                              echo round($applicant['Profile']['shares'] * 100 / $company_to_edit['total_shares'], 2);
-                            } else {
-                              echo 0;
-                            }
-                            ?></td>
+                             <td>
+                              <div id="pourcentage_shares_<?php echo $applicant['Profile']['id'];?>"><?php 
+                              if ($total_shares) {
+                                echo round($applicant['Profile']['shares'] * 100 / $total_shares, 2);
+                              } else {
+                                echo 0;
+                              }
+                              ?></div>
+                            </td>
                             <td>
-                             <?php echo $this->Form->input('loan', array(
+                             <?php echo $this->Form->input('Profile.' . $applicant['Profile']['id'] . '.loan_affectation', array(
                               'type' => 'select',
                               'label' => false,
                               'class' => 'form-control',
-                              'id' => 'loan',
+                              'id' => 'loan_affectation' . $applicant['Profile']['id'],
                               // 'value' =>  $company_to_edit['legal_status'],
                               'options' => array(
                                 'Capital' => 'Capital',
@@ -204,41 +205,39 @@
                     </div> <!-- end of form-group -->
                   </div> <!-- end of documents -->
                   <div class="form-group">
-                    <?php echo $this->Form->radio('report', array(
+                    <?php echo $this->Form->radio('Company.is_bs_closed', array(
                       1 => 'Oui',
                       0 => 'Non'
                       ), array(
                       'class' => 'css-checkbox',
-                      'id' => 'report',
+                      'id' => 'is_bs_closed',
                       'legend' => 'Avez vous clôturé un bilan ? : <span class="glyphicon glyphicon-asterisk required"/>',
-                      'value' => 0,
                       'label' => array(true, 'class' => 'css-label')
                       )); ?>
                     </div> <!-- end of form-group -->
                     <div class="form-group" id="report-date">
-                     <?php echo $this->Form->input('report_date', array(
+                     <?php echo $this->Form->input('Company.closing_date', array(
                        'type' => 'text',
                        'label' => 'Date de clôture : <span class="glyphicon glyphicon-asterisk required"/>',
                        'class' => 'form-control',
                        'placeholder' => 'jj/mm/aaaa',
-                       'id' => 'report_date',
+                       'id' => 'closing_date'
                        )); ?>
                      </div> <!-- end of form-group -->
                      <div class="form-group" id="report-value">
-                      <?php echo $this->Form->radio('report_value', array(
+                      <?php echo $this->Form->radio('Company.is_positive', array(
                         1 => 'Positif',
                         0 => 'Négatif'
                         ), array(
                         'class' => 'css-checkbox',
-                        'id' => 'report_value',
+                        'id' => 'is_positive',
                         'legend' => 'Le bilan était (ou sera t-il) positif (> ou = 0) ou négatif ? <span class="glyphicon glyphicon-asterisk required"/>',
-                        'value' => 0,
                         'label' => array(true, 'class' => 'css-label')
                         )); ?>
                       </div> <!-- end of form-group -->
                       <div class="form-group">
                         <h4>Je certifie sur l'honneur de l'exactitude des informations renseignées ci-dessus.</h4>
-                        <?php echo $this->Form->checkbox('terms_company', array(
+                        <?php echo $this->Form->checkbox('Company.terms_company', array(
                           'legend' => false,
                           'class' => 'css-checkbox',
                           'id' => 'terms_company'
