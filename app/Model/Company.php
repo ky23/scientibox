@@ -10,6 +10,16 @@ class Company extends AppModel {
 				)
 			)
 		);
+	public $hasMany = array(
+		'Applicant' => array(
+			'className' => 'Applicant',
+			'foreignKey' => 'Applicant.company_id'
+			),
+		'Profile' => array(
+			'className' => 'Profile',
+			'foreignKey' => 'Profile.company_id'
+			)
+		);
 	public $belongsTo = array(
 		'Event' => array(
 			'className' => 'Event',
