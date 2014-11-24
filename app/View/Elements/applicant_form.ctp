@@ -10,12 +10,11 @@
 		</div> <!-- end of form-group -->
 		<div class="form-group">
 			<?php echo $this->Form->radio('civility', array(
-				1 => 'Mr',
-				0 => 'Mme'), array(
+				'MR' => 'Mr',
+				'MME' => 'Mme'), array(
 				'class' => 'css-checkbox',
 				'id' => 'civility',
 				'legend' => 'Civilité : <span class="glyphicon glyphicon-asterisk required"/>',
-				'value' => 0,
 				'label' => array('class' => 'css-label', 'value' => 'gringo')
 				));?>
 			</div> <!-- end of form-group -->
