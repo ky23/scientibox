@@ -16,6 +16,12 @@
  		});
  	}
 
+ 	if ($('#legal_status, #social_situation').val() == 'Autre') {
+ 		$('#other').css("visibility", "visible");
+ 	} else {
+ 		$('#other').css("visibility", "hidden");
+ 	}
+
  	$('#legal_status, #social_situation').click(function() {
  		if ($(this).val() == 'Autre') {
  			$('#other').css("visibility", "visible");
@@ -24,7 +30,15 @@
  		}
  	});
 
- 	$('#report0, #report1').click(function() {
+ 	if ($('#is_bs_closed1').is(':checked')) {
+ 		$('#report-date').css("visibility", "visible");
+ 		$('#report-value').css("visibility", "visible");
+ 	} else if ($('#is_bs_closed0').is(':checked')) {
+ 		$('#report-date').css("visibility", "hidden");
+ 		$('#report-value').css("visibility", "hidden");
+ 	}
+
+ 	$('#is_bs_closed0, #is_bs_closed1').click(function() {
  		if ($(this).val() == '1') {
  			$('#report-date').css("visibility", "visible");
  			$('#report-value').css("visibility", "visible");
@@ -52,35 +66,42 @@
  		}
  	});
 
- 	$('#report_value0, #report_value1').click(function() {
+ 	$('#is_positive0, #is_positive1').click(function() {
  		if ($(this).val() == '1') {
  			dialogReport.dialog('open');
  		} 
  	});
 
- 	// $('#account, #capital').click(function() {
- 	// 	if ($(this).attr('id') == 'account') {
- 	// 		var isChecked = $(this).is(':checked');
- 	// 		var checkbox = $('#associates-convention');
- 	// 		(isChecked) ? checkbox.css('visibility', 'visible') : checkbox.css('visibility', 'hidden');
- 	// 	}
- 	// 	if (!$('#account, #capital').is(':checked')) {
- 	// 		$('#capital').prop('checked', true);
- 	// 	}
- 	// });
+ 	$('#total_shares').on("change", function() {
+ 		var total = $(this).val();
+ 		$('input[id^="shares_"]').each(function() {
+ 			var array = $(this).attr('id').split('_');
+ 			var result = $(this).val() * 100 / $('#total_shares').val();
+ 			$('#pourcentage_shares_' + array[1]).text(result.toFixed(2));
+ 		});
+ 	});
+
+ 	$('input[id^="shares_"]').each(function() {
+ 		$(this).on("change", function() {
+ 			var array = $(this).attr('id').split('_');
+ 			var result = $(this).val() * 100 / $('#total_shares').val();
+ 			$('#pourcentage_shares_' + array[1]).text(result.toFixed(2));
+ 			console.log($('pourcentage_shares_1').attr('id'));
+ 		});
+ 	});
 
  	$('.upload-button-remove').click(function() {
  		var parent = $(this).parent().parent('.inputfile');
  		validates($(parent).find('input[type="file"]'));
  	});
 
- 	$('form * input:not([type="submit"]').each(function() {
- 		validates(this);
- 		$(this).change(function() {
- 			console.log(this);
- 			validates(this);
- 		});
- 	});
+ 	// $('form * input:not([type="submit"]').each(function() {
+ 	// 	validates(this);
+ 	// 	$(this).change(function() {
+ 	// 		console.log(this);
+ 	// 		validates(this);
+ 	// 	});
+ 	// });
 
  	$('form').bind('submit', function(e) {
  		var errors = $('form').find('.error-message').length;
