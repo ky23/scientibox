@@ -13,7 +13,9 @@ class ApplicantsController extends AppController {
 	public function login($token = null) {
 		$this->autoRender = false;
 		if (isset($token)) {
-			$applicant = $this->Applicant->find('first', array('conditions' => array('Applicant.token' => $token), 'recursive' => -1));
+			$applicant = $this->Applicant->find('first', array(
+				'conditions' => array('Applicant.token' => $token),
+				'recursive' => -1));
 			$this->Session->write('Applicant.id', $applicant['Applicant']['id']);
 			if (!empty($applicant)) {
 				if ($this->checkTokenValidity($applicant['Applicant']['token_validity'])) {
@@ -22,18 +24,17 @@ class ApplicantsController extends AppController {
 					$this->Session->setFlash('Votre compte a expiré.', 'flash_error');
 					return $this->redirect(array('controller' => 'home', 'action' => 'index'));
 				}
-			} else {
-				return $this->redirect(array('controller' => 'home', 'action' => 'index'));
 			}
-		} else {
-			return $this->redirect(array('controller' => 'home', 'action' => 'index'));
 		}
+		return $this->redirect(array('controller' => 'home', 'action' => 'index'));
 	}
 
 	public function signup() {
 		$this->autoRender = false;
 		if ($this->request->is('post')) {
-			$finded_user = $this->Applicant->find('first', array('conditions' => array('Applicant.email' => $this->request->data['email']), 'recursive' => -1));
+			$finded_user = $this->Applicant->find('first', array(
+				'conditions' => array('Applicant.email' => $this->request->data['email']),
+				'recursive' => -1));
 			if (!empty($finded_user)) {
 				if ($finded_user['Applicant']['token'] != null) {
 					if ($this->checkTokenValidity($finded_user['Applicant']['token_validity'])) {
@@ -64,6 +65,7 @@ class ApplicantsController extends AppController {
 				}
 			} else {
 				$informations = WebServices::getInformations($this->request->data['email']);
+				debug($inf); die();
 				if (!empty($informations)) {
 					if (($token = $this->saveInformations($informations, $this->request->data['email']))) {
 						if ($this->Applicant->send($this->request->data, $token)) {
