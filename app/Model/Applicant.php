@@ -2,11 +2,13 @@
 
 class Applicant extends AppModel {
 	var $name = 'Applicant';
-	public $belongsTo = array(
+	public $hasOne =  array(
 		'Profile' => array(
 			'className' => 'Profile',
-			'foreignKey' => 'profile_id'
-			),
+			'foreignKey' => 'applicant_id'
+			)
+		);
+	public $belongsTo = array(
 		'Company' => array(
 			'className' => 'Company',
 			'foreignKey' => 'company_id'
