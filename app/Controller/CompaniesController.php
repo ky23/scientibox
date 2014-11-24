@@ -25,33 +25,47 @@ class CompaniesController extends AppController {
 
 	public function edit_company() {
 		$this->loadModel('Applicant');
-		App::uses('NotifEventListener', 'Event');
-		$this->Company->getEventManager()->attach(new NotifEventListener());
+		// App::uses('NotifEventListener', 'Event');
+		// $this->Company->getEventManager()->attach(new NotifEventListener());
 		$id = $this->Session->read("Applicant.id");
 		$applicant = $this->Applicant->find('first', array('conditions' => array('Applicant.id' => $id)));
 		if (isset($id) && !empty($applicant)) {
-			$applicant['Company']['creation_date'] = date("d-m-Y", strtotime($applicant['Company']['creation_date']));
-			$this->set('company_to_edit', $applicant['Company']);
-			$applicants = $this->Applicant->find('all', array('conditions' => array('company_id' => $applicant['Company']['id'])));
-			$this->set('applicants', $applicants);
-			if ($this->request->is('post', 'put')) {
-				$this->Company->set($this->request->params['form']);
+			if ($this->request->is(array('post', 'put'))) {
 				$this->request->data['Company']['id'] = $applicant['Company']['id'];
-				$this->request->data['Company']['applicant_id'] = $id;
-				
-				$this->request->data['Company']['account'] = $this->request->data['account'];
-				$this->request->data['Company']['capital'] = $this->request->data['capital'];
-				unset($this->request->data['account']);
-				unset($this->request->data['capital']);
-
-				// debug($this->request->data);
-				// debug($this->request->params['form']); die();
-				$this->request->data['Company']['creation_date'] = date("Y-m-d", strtotime($this->request->data['Company']['creation_date']));
-				if ($this->Company->save($this->request->data, false)) {
+				$this->request->data['Company']['creation_date'] = date("Y-m-d",
+					strtotime($this->request->data['Company']['creation_date']));
+				$this->request->data['Company']['closing_date'] = date("Y-m-d",
+					strtotime($this->request->data['Company']['closing_date']));
+				$data['Company'] = $this->request->data['Company'];
+				$data['Profile']  = array();
+				foreach ($this->request->data['Profile'] as $key => $value) {
+					$tmp['id'] = $key;
+					$tmp['company_id'] = $applicant['Company']['id'];
+					$tmp['shares'] = $this->request->data['Profile'][$key]['shares'];
+					$tmp['loan_affectation'] = $this->request->data['Profile'][$key]['loan_affectation'];
+					array_push($data['Profile'], $tmp);
+				}
+				if ($this->Company->saveAssociated($data, array('validate' => false))) {
 					return $this->redirect(array('controller' => 'profiles', 'action' => 'edit_profile'));
 				} else {
 					debug($this->Company->validationErrors); die();
 				}
+			} else {
+				$applicant['Company']['creation_date'] = date("d-m-Y",
+					strtotime($applicant['Company']['creation_date']));
+				$applicant['Company']['closing_date'] = date("d-m-Y",
+					strtotime($applicant['Company']['closing_date']));
+				$data['Company'] = $applicant['Company'];
+				$applicants = $this->Applicant->find('all', array(
+					'conditions' => array('Applicant.company_id' => $applicant['Company']['id'])));
+				foreach ($applicants as $key => $value) {
+					$data['Profile'][$value['Profile']['id']]['shares'] = $value['Profile']['shares'];
+					$data['Profile'][$value['Profile']['id']]['loan_affectation'] =
+					$value['Profile']['loan_affectation']; 
+				}
+				$this->request->data = $data;
+				$this->set('applicants', $applicants);
+				$this->set('total_shares', $applicant['Company']['total_shares']);
 			}
 		} else {
 			return $this->redirect(array('controller' => 'home', 'action' => 'index'));
@@ -98,7 +112,7 @@ class CompaniesController extends AppController {
 	public function allow() {
 		$this->autoRender = false;
 		if ($this->request->is('ajax')) {
-				if (!empty($this->request->data['Company']['data'])) {
+			if (!empty($this->request->data['Company']['data'])) {
 				$data = explode('@', $this->request->data['Company']['data']);
 				if (count($data) == 3) { 
 					$company = $this->Company->find('first', array('conditions' => array(
