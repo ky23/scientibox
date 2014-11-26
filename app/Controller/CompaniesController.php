@@ -58,6 +58,7 @@ class CompaniesController extends AppController {
 				$data['Company'] = $applicant['Company'];
 				$applicants = $this->Applicant->find('all', array(
 					'conditions' => array('Applicant.company_id' => $applicant['Company']['id'])));
+				//debug($applicants); die();
 				foreach ($applicants as $key => $value) {
 					$data['Profile'][$value['Profile']['id']]['shares'] = $value['Profile']['shares'];
 					$data['Profile'][$value['Profile']['id']]['loan_affectation'] =
