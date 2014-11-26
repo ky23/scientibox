@@ -77,7 +77,16 @@
 						float: none;
 					}
 
+					.inputfile .upload-button input[type="file"] {
+						cursor: pointer;
+					}
 
+					.ui-tabs .ui-tabs-nav li.ui-tabs-active,
+					.ui-tabs .ui-tabs-nav li.ui-tabs-active .ui-tabs-anchor,
+					.ui-tabs .ui-tabs-nav li.ui-state-disabled .ui-tabs-anchor,
+					.ui-tabs .ui-tabs-nav li.ui-tabs-loading .ui-tabs-anchor {
+						outline:none;
+					}
 
 /*-----------------------------------------
 					body
