@@ -18,7 +18,8 @@ class ApplicantsController extends AppController {
 				'recursive' => -1));
 			$this->Session->write('Applicant.id', $applicant['Applicant']['id']);
 			if (!empty($applicant)) {
-				if ($this->checkTokenValidity($applicant['Applicant']['token_validity'])) {
+				if ($this->checkTokenValidity($applicant['Applicant']['token_validity'])
+					&& $applicant['Applicant']['is_authorized']) {
 					return $this->redirect(array('controller' => 'companies', 'action' => 'edit_company'));
 				} else {
 					$this->Session->setFlash('Votre compte a expiré.', 'flash_error');
