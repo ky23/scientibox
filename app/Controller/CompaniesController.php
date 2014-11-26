@@ -46,6 +46,7 @@ class CompaniesController extends AppController {
 					array_push($data['Profile'], $tmp);
 				}
 				if ($this->Company->saveAssociated($data, array('validate' => false))) {
+					$this->Session->write("tabId", -1);
 					return $this->redirect(array('controller' => 'profiles', 'action' => 'edit_profile'));
 				} else {
 					debug($this->Company->validationErrors); die();
