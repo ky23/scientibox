@@ -15,6 +15,7 @@ class ProfilesController extends AppController {
 		$id = $this->Session->read("Applicant.id");
 		$applicant = $this->Applicant->find('first',
 			array('conditions' => array('Applicant.id' => $id)));
+		$this->Session->write("tabId", 0);
 		if (isset($id) && !empty($applicant)) {
 			if ($this->request->is(array('post', 'put'))) {
 				$token = $this->request->data['tkn'];
