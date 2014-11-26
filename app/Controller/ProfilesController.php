@@ -107,10 +107,10 @@ class ProfilesController extends AppController {
 	public function warrantly() {
 		$id = $this->Session->read("Applicant.id");
 		if (isset($id)) {
-			$this->loadModel('Applicant');
-			$applicant = $this->Applicant->find('first', array('conditions' => array('Applicant.id' => $id)));
-			$applicants = $this->Applicant->find('all', array('conditions' => array('company_id' => $applicant['Company']['id'])));
-			$this->set('applicants', $applicants);
+			// $this->loadModel('Applicant');
+			// $applicant = $this->Applicant->find('first', array('conditions' => array('Applicant.id' => $id)));
+			// $applicants = $this->Applicant->find('all', array('conditions' => array('company_id' => $applicant['Company']['id'])));
+			// $this->set('applicants', $applicants);
 		} else {
 			return $this->redirect(array('controller' => 'home', 'action' => 'index'));
 		}
