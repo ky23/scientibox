@@ -14,7 +14,12 @@ class Applicant extends AppModel {
 			'foreignKey' => 'company_id'
 			)
 		);
-
+	public $hasMany = array(
+		'File' => array(
+			'className' => 'File',
+			'foreignKey' => 'applicant_id'
+			)
+		);
 	public function send($data, $token) {	
 		$this->set($data);
 		if ($this->validates()) {

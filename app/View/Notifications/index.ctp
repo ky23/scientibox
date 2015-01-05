@@ -4,7 +4,7 @@
 	<table class="table table-hover"> 
 		<thead>
 			<tr> 
-				<th>Entreprise</th>
+				<th>Société</th>
 				<th>Page modifiée</th>
 				<th>Champs modifié</th>
 				<th>Date et heure</th>

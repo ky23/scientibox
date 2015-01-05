@@ -2,6 +2,12 @@
  	var dialogReport = $('#dialog-report').dialog({
  		autoOpen: false,
  		modal: true,
+ 		buttons: [{
+ 			text: "Valider",
+ 			click: function() {
+ 				$(this).dialog( "close" );
+ 			}
+ 		}],
  		close: function() {
  		}
  	});
@@ -122,7 +128,7 @@
  	var errors = $('form').find('.error-message').length;
  	if (!($('#terms_company').is(':checked'))) {
  		e.preventDefault();
- 		alert('Veuillez cocher la case sertifiant l\'exactitude des informations renseignées');
+ 		alert('Veuillez cocher la case certifiant l\'exactitude des informations renseignées');
  		return false;
  	}
  	if (errors == 0) {

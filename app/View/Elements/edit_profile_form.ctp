@@ -4,6 +4,9 @@
 'type' => 'file',
 'id' => 'Profile',
 'class' => 'form-horizontal'
+), array(
+'controller',
+'action' => 'edit_company'
 ));?>
 <?php $this->request->data['Profile'] = $applicant['Profile'];?>
 <div class="form-group"> 
@@ -155,7 +158,7 @@
 																	), array(
 																	'class' => 'css-checkbox',
 																	'id' => 'had_company',
-																	'legend' => 'Avez vous déjà créé une entreprise en France (y compris Auto Entrepreneur) ? <span class="glyphicon glyphicon-asterisk required"/>',
+																	'legend' => 'Avez vous déjà créé une Société en France (y compris Auto Entrepreneur) ? <span class="glyphicon glyphicon-asterisk required"/>',
 																	'label' => array(true, 'class' => 'css-label')
 																	));
 																	?>
@@ -178,25 +181,22 @@
 																		?>
 																	</div> <!-- end of form-group -->
 																	<div class="form-group" id="emplt">
-																		<?php echo $this->Form->input('file', array(
+																		<?php echo $this->Form->input('work_certificate_file', array(
 																			'type' => 'file',
-																			'name' => 'emplt_file',
 																			'id' => 'emplt_file',
 																			'label' => 'Attestation de travail : <span class="glyphicon glyphicon-asterisk required"/>'
 																			));?>
 																		</div> <!-- end of form-group -->
 																		<div class="form-group">
-																			<?php echo $this->Form->input('file', array(
+																			<?php echo $this->Form->input('id_card_file', array(
 																				'type' => 'file',
-																				'name' => 'identity_file',
 																				'id' => 'identity_file',
 																				'label' => 'Pièce d\'identité : <span class="glyphicon glyphicon-asterisk required"/>'
 																				));?>
 																			</div> <!-- end of form-group -->
 																			<div class="form-group">
-																				<?php echo $this->Form->input('file', array(
+																				<?php echo $this->Form->input('rib_file', array(
 																					'type' => 'file',
-																					'name' => 'bank_file',
 																					'id' => 'bank_file',
 																					'label' => 'RIB personnel domicilié en France : <span class="glyphicon glyphicon-asterisk required"/>'
 																					));?>
@@ -212,25 +212,22 @@
 																						'label' => array(true, 'class' => 'css-label')
 																						));
 																						?>
-																						<?php echo $this->Form->input('file', array(
+																						<?php echo $this->Form->input('proof_home_file', array(
 																							'type' => 'file',
-																							'name' => 'home_file',
 																							'id' => 'home_file',
 																							'label' => 'Justificatif de domicile : <span class="glyphicon glyphicon-asterisk required"/>'
 																							));?>
 																						</div> <!-- end of form-group -->
 																						<div class="form-group" id="proof_home">
-																							<?php echo $this->Form->input('file', array(
+																							<?php echo $this->Form->input('accommodation_certificate_file', array(
 																								'type' => 'file',
-																								'name' => 'proof_home_file',
 																								'id' => 'proof_home_file',
-																								'label' => 'Attestatiion d\'hébergement : <span class="glyphicon glyphicon-asterisk required"/>'
+																								'label' => 'Attestation d\'hébergement : <span class="glyphicon glyphicon-asterisk required"/>'
 																								));?>
 																							</div> <!-- end of form-group -->
 																							<div class="form-group" id="idt_home">
-																								<?php echo $this->Form->input('file', array(
+																								<?php echo $this->Form->input('accommodating_id_card_file', array(
 																									'type' => 'file',
-																									'name' => 'idt_home_file',
 																									'id' => 'idt_home_file',
 																									'label' => 'Pièce d\'identité de l\'hébergeant : <span class="glyphicon glyphicon-asterisk required"/>'
 																									));?>

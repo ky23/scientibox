@@ -6,18 +6,19 @@ class Company extends AppModel {
 		'Upload.Upload' => array(
 			'fields' => array(
 				'kbis' => 'files/UploadedFiles/%company',
+				'rib' => 'files/UploadedFiles/%company',
 				'associates' => 'files/UploadedFiles/%company'
 				)
 			)
 		);
 	public $hasMany = array(
+		'Profile' => array( // to remove
+			'className' => 'Profile',
+			'foreignKey' => 'company_id'
+			),
 		'Applicant' => array(
 			'className' => 'Applicant',
-			'foreignKey' => 'Applicant.company_id'
-			),
-		'Profile' => array(
-			'className' => 'Profile',
-			'foreignKey' => 'Profile.company_id'
+			'foreignKey' => 'company_id'
 			)
 		);
 	public $belongsTo = array(

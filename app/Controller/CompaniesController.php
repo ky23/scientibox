@@ -13,8 +13,9 @@ class CompaniesController extends AppController {
 	}
 
 	public function index($page = 1) {
-		$this->loadModel('Applicant');
+		// $this->loadModel('Applicant');
 		$this->set('companies', $this->Company->find('all'));
+		//debug($this->Company->find('all')); die();
 		$this->set('itemPerPage', $this->itemPerPage);
 		if ($page == 1) {
 			$this->set('pages', array($page => true, $page + 1 => false, $page + 2 => false));
@@ -29,8 +30,11 @@ class CompaniesController extends AppController {
 		// $this->Company->getEventManager()->attach(new NotifEventListener());
 		$id = $this->Session->read("Applicant.id");
 		$applicant = $this->Applicant->find('first', array('conditions' => array('Applicant.id' => $id)));
+		//debug($applicant); die();
 		if (isset($id) && !empty($applicant)) {
 			if ($this->request->is(array('post', 'put'))) {
+				//debug($this->request->data); die();
+				$this->request->data['Company']['upload_owner'] = $id;
 				$this->request->data['Company']['id'] = $applicant['Company']['id'];
 				$this->request->data['Company']['creation_date'] = date("Y-m-d",
 					strtotime($this->request->data['Company']['creation_date']));
@@ -52,18 +56,17 @@ class CompaniesController extends AppController {
 					debug($this->Company->validationErrors); die();
 				}
 			} else {
-				$applicant['Company']['creation_date'] = date("d-m-Y",
-					strtotime($applicant['Company']['creation_date']));
-				$applicant['Company']['closing_date'] = date("d-m-Y",
-					strtotime($applicant['Company']['closing_date']));
+				$applicant['Company']['creation_date'] = (!empty($applicant['Company']['creation_date'])) ?
+				date("d-m-Y", strtotime($applicant['Company']['creation_date'])) : date("d-m-Y");
+				$applicant['Company']['closing_date'] = (!empty($applicant['Company']['closing_date'])) ?
+				date("d-m-Y", strtotime($applicant['Company']['closing_date'])) : date("d-m-Y");
 				$data['Company'] = $applicant['Company'];
 				$applicants = $this->Applicant->find('all', array(
 					'conditions' => array('Applicant.company_id' => $applicant['Company']['id'])));
-				//debug($applicants); die();
 				foreach ($applicants as $key => $value) {
 					$data['Profile'][$value['Profile']['id']]['shares'] = $value['Profile']['shares'];
 					$data['Profile'][$value['Profile']['id']]['loan_affectation'] =
-					$value['Profile']['loan_affectation']; 
+					$value['Profile']['loan_affectation'];
 				}
 				$this->request->data = $data;
 				$this->set('applicants', $applicants);

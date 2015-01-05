@@ -5,11 +5,12 @@ class Profile extends AppModel {
 	public $actsAs = array(
 		'Upload.Upload' => array(
 			'fields' => array(
-				'identity' => 'files/UploadedFiles/%applicant',
-				'home' => 'files/UploadedFiles/%applicant',
-				'bank' => 'files/UploadedFiles/%applicant',
-				'emplt' => 'files/UploadedFiles/%applicant',
-				'terms' => 'files/UploadedFiles/%applicant'
+				'work_certificate' => 'files/UploadedFiles/%company/%applicant',
+				'id_card' => 'files/UploadedFiles/%company/%applicant',
+				'rib' => 'files/UploadedFiles/%company/%applicant',
+				'proof_home' => 'files/UploadedFiles/%company/%applicant',
+				'accommodation_certificate' => 'files/UploadedFiles/%company/%applicant',
+				'accommodating_id_card' => 'files/UploadedFiles/%company/%applicant'
 				)
 			)
 		);

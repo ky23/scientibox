@@ -14,7 +14,7 @@
             <div class="control-group">
                 <div class="controls">
                     <span class="glyphicon glyphicon-bookmark"></span>
-                    <input type="text" class="form-control" id="company" name="company" placeholder="Nom de l'entreprise" required/>
+                    <input type="text" class="form-control" id="company" name="company" placeholder="Nom de la Société" required/>
                 </div> <!-- end of controls -->
             </div> <!-- end of control-group -->   
             <div class="control-group">

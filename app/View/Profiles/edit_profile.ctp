@@ -8,7 +8,7 @@
 	</ul>
 	<?php foreach ($applicants as $ind => $applicant): ?>
 	<div id="<?php echo 'tabs-' . $applicant['Profile']['id']; ?>">
-		<?php echo $this->element('applicant_form', array('applicant' => $applicant)); ?> 
+		<?php echo $this->element('edit_profile_form', array('applicant' => $applicant)); ?> 
 	</div>	
 <?php endforeach; ?> <?php unset($applicants); ?>
 </div>
@@ -31,4 +31,6 @@ $(function() {
 	var index = "<?php echo $_SESSION['tabId']?>";
 	$('#tabs').tabs( "option", "active", index + 1);
 });
-</script>
+</script>	
+
+

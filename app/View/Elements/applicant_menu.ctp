@@ -2,7 +2,7 @@
     <div id="menu">
         <ul class="nav nav-pills nav-stacked">
             <li class="<?php echo (!empty($this->params['action']) && ($this->params['action'] == 'edit_company') && $this->params['controller'] == 'companies') ? 'active' :'inactive' ?>">
-                <?php echo $this->Html->link('<span class="glyphicon glyphicon-th-large"></span> Entreprise',
+                <?php echo $this->Html->link('<span class="glyphicon glyphicon-th-large"></span> Société',
                 array('controller' => 'companies', 'action' => 'edit_company'), array('escape' => false)); ?> 
             </li>
             <li class="<?php echo (!empty($this->params['action']) && ($this->params['action'] == 'edit_profile') && $this->params['controller'] == 'profiles') ? 'active' :'inactive' ?>">

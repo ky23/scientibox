@@ -3,7 +3,7 @@
     <div id="menu">
         <ul class="nav nav-pills nav-stacked"> 
             <li class="<?php echo (!empty($this->params['action']) && ($this->params['action'] == 'index') && $this->params['controller'] == 'companies') ? 'active' : 'inactive' ?>">
-                <?php echo $this->Html->link('<span id="company" class="glyphicon glyphicon-th-large"></span> Entreprises',
+                <?php echo $this->Html->link('<span id="company" class="glyphicon glyphicon-th-large"></span> Sociétés',
                 array('controller' => 'companies', 'action' => 'index'), array('escape' => false));?>
             </li>
             <li class="<?php echo (!empty($this->params['action']) && ($this->params['action'] == 'index') && $this->params['controller'] == 'events') ? 'active' : 'inactive' ?>">

@@ -4,7 +4,7 @@
 	<table class="table table-hover"> 
 		<thead>
 			<tr> 
-				<th>Entreprise</th>
+				<th>Société</th>
 				<th>Contact</th>
 				<th>Statut</th>
 				<th>Visualiser</th>

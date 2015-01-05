@@ -10,7 +10,7 @@
   </div> <!-- end of form-group -->
   <div class="informations"> 
     <div class="form-group"> 
-      <h3 class="span8 pull-left title">Infomations générales sur l'entreprise</h3>
+      <h3 class="span8 pull-left title">Infomations générales sur la Société</h3>
     </div> <!-- end of form-group -->
     <div class="form-group">
       <?php echo $this->Form->input('Company.name', array(
@@ -132,11 +132,19 @@
                         )); ?>
                       </div> <!-- end of form-group -->
                       <div class="form-group">
-                        <?php echo $this->Form->input('file', array(
+                        <?php echo $this->Form->input('kbis_file', array(
                           'type' => 'file',
-                          'name' => 'kbis_file',
+                          // 'name' => 'kbis_file',
                           'id' => 'kbis_file',
-                          'label' => 'Extrait Kbis: <span class="glyphicon glyphicon-asterisk required"/>'
+                          'label' => 'Extrait Kbis de la société : <span class="glyphicon glyphicon-asterisk required"/>'
+                          )); ?>
+                        </div> <!-- end of form-group -->
+                         <div class="form-group">
+                        <?php echo $this->Form->input('rib_file', array(
+                          'type' => 'file',
+                          // 'name' => 'kbis_file',
+                          'id' => 'rib_file',
+                          'label' => 'RIB de la société : <span class="glyphicon glyphicon-asterisk required"/>'
                           )); ?>
                         </div> <!-- end of form-group -->
                       </div> <!-- end of informations -->
@@ -211,7 +219,7 @@
                       ), array(
                       'class' => 'css-checkbox',
                       'id' => 'is_bs_closed',
-                      'legend' => 'Avez vous clôturé un bilan ? : <span class="glyphicon glyphicon-asterisk required"/>',
+                      'legend' => 'Existe-t-il un bilan pour la société ? : <span class="glyphicon glyphicon-asterisk required"/>',
                       'label' => array(true, 'class' => 'css-label')
                       )); ?>
                     </div> <!-- end of form-group -->

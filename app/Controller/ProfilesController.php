@@ -17,6 +17,9 @@ class ProfilesController extends AppController {
 			array('conditions' => array('Applicant.id' => $id)));
 		if (isset($id) && !empty($applicant)) {
 			if ($this->request->is(array('post', 'put'))) {
+				$this->request->data['Profile']['upload_owner'] = $id;
+				$this->request->data['Profile']['company_name'] = $applicant['Company']['name'];
+				$this->request->data['Profile']['company_id'] = $applicant['Company']['id'];
 				$token = $this->request->data['tkn'];
 				$applicant = $this->Applicant->find('first',
 					array('conditions' => array('token' => $token)));
@@ -30,7 +33,7 @@ class ProfilesController extends AppController {
 							if ($key < $lenght)
 								$tabId = $key;
 						}
-					}
+					} 
 					$data['Profile'] = $this->request->data['Profile'];
 					$data['Profile']['id'] = $applicant['Profile']['id'];
 					$data['Profile']['birthdate'] = date("Y-m-d", strtotime($data['Profile']['birthdate']));

@@ -17,7 +17,7 @@ class Admin extends AppModel {
 		'password' => array(
 			'rule' => 'notEmpty',
 			'required' => true,
-			'message' => 'Vous devez entrer le nom de votre entreprise'
+			'message' => 'Vous devez entrer le nom de votre Société'
 			)
 		);
 
