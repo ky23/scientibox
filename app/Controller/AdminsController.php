@@ -37,21 +37,21 @@ class AdminsController extends AppController {
 	}
 
 	public function add_account() {
-		if ($this->request->is('post')) {
-			if (!empty($this->request->data)) {
-				$admin = $this->Admin->find('first', array('conditions' => array('username' => $this->request->data['Admin']['username'])));
-				if (empty($admin)) {
-					$this->request->data['Admin']['password'] = $this->randomPassword();
-					if ($this->Admin->save($this->request->data, false)) {
-						$token = $this->Admin->id . '@' . md5($this->request->data['Admin']['username']);
-						$this->Admin->sendMail($this->request->data, $token, 'admins/activate/', 'add_account', 'Inscription Scientibox');
-						$this->Session->setFlash('Votre compte à bien été ajouté', 'flash_success');
-					} else {
-						$this->Session->setFlash('Les informations saisies sont incorrectes.', 'flash_error');
-					}
+		if ($this->request->is('post') && !empty($this->request->data)) {
+			$admin = $this->Admin->find('first', array(
+				'conditions' => array('username' => $this->request->data['Admin']['username'])
+				));
+			if (empty($admin)) {
+				$this->request->data['Admin']['password'] = $this->randomPassword();
+				if ($this->Admin->save($this->request->data, false)) {
+					$token = $this->Admin->id . '@' . md5($this->request->data['Admin']['username']);
+					$this->Admin->sendMail($this->request->data, $token, 'admins/activate/', 'add_account', 'Inscription Scientibox');
+					$this->Session->setFlash('Votre compte à bien été ajouté', 'flash_success');
 				} else {
-					$this->Session->setFlash('Ce compte est déja utilisé', 'flash_error');
+					$this->Session->setFlash('Les informations saisies sont incorrectes.', 'flash_error');
 				}
+			} else {
+				$this->Session->setFlash('Ce compte est déja utilisé', 'flash_error');
 			}
 			$this->Session->delete('key');
 		}
