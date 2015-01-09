@@ -51,7 +51,7 @@ class UploadBehavior extends ModelBehavior {
 			$data['type'] = $field;
 			$data['name'] = $modelData[$field . "_file"]['name'];
 			$data['extension'] = $extension;
-			$data['path'] = 'app/webroot/' . $path;
+			$data['path'] = '/app/webroot/' . $path;
 			$data['size'] = $modelData[$field . "_file"]['size'];
 			$data['date'] = date("Y-m-d H:i:s");
 			$data['applicant_id'] = $modelData['upload_owner'];
@@ -65,14 +65,14 @@ class UploadBehavior extends ModelBehavior {
 		$path = trim($path, "/");
 		if ($model->alias == 'Company') {
 			$replace = array(
-				'%company' => strtolower($model->data[$model->alias]['name'] . "_" . $model->id . DS)
+				'%company' => strtolower($model->data[$model->alias]['name'] . "_" . $model->id . '/')
 				);
 		} else if ($model->alias == 'Profile') {
 			$replace = array(
 				'%company' => strtolower($model->data[$model->alias]['company_name'] . "_" .
 					$model->data[$model->alias]['company_id']),
 				'%applicant' => strtolower($model->data[$model->alias]['first_name'] . "_"
-					. $model->data[$model->alias]['last_name'] . "_" . $model->id . DS)
+					. $model->data[$model->alias]['last_name'] . "_" . $model->id . '/')
 				);
 		}
 		$path = strtr($path, $replace);

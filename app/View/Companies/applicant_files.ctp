@@ -22,7 +22,7 @@
 						<td><?php echo $item['type']; ?></td>
 						<td><?php echo $this->Html->link($item['name'],
 						$item['path'] . $item['name'],
-						array('class' => 'file_link', 'target' => '_blank', 'full_base' => false)); ?></td>
+						array('class' => 'file_link', 'target' => '_blank')); ?></td>
 						<?php if ($item['is_valid']): ?>
 						<td><div class="custom"><span class="glyphicon glyphicon-ok"></span></div></td>
 					<?php else: ?>

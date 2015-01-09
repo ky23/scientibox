@@ -30,7 +30,7 @@
 					<td><?php echo $data[$i]['category']; ?></td>
 					<td><?php echo $data[$i]['type']; ?></td>
 					<td><?php echo $this->Html->link($data[$i]['name'],
-						$_SERVER['HTTP_HOST'] . '/scientibox/' . $data[$i]['path'] . $data[$i]['name'],
+						$data[$i]['path'] . $data[$i]['name'],
 						array('class' => 'file_link', 'target' => '_blank')); ?></td>
 					</tr>
 				<?php endfor; ?>

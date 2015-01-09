@@ -18,7 +18,7 @@
 				<tr>
 					<td><?php echo $value['File']['type']; ?></td>
 					<td><?php echo $this->Html->link($value['File']['name'],
-						$_SERVER['HTTP_HOST'] . '/scientibox/' . $value['File']['path'] . $value['File']['name'],
+						$value['File']['path'] . $value['File']['name'],
 						array('class' => 'file_link', 'target' => '_blank')); ?></td>
 					<?php if ($value['File']['is_valid']): ?>
 					<td><div class="custom"><span class="glyphicon glyphicon-ok"></span></div></td>
