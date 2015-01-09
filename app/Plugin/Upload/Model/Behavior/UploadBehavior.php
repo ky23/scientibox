@@ -29,17 +29,17 @@ class UploadBehavior extends ModelBehavior {
 				$file = $model->data[$model->alias][$field . "_file"];
 				$extension = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
 				//debug($extension); die();
-				$oldmask = umask(0);
 				$path = $this->getUploadPath($model, $path);
 				if (!file_exists(WWW_ROOT . $path)) {
-					mkdir(WWW_ROOT . $path, 0755, true);
+					if (!mkdir(WWW_ROOT . $path, 0755, true)) {
+						return; // add error handling
+					}
 				}
-				chmod(WWW_ROOT . $path, 0644);
+				chmod(WWW_ROOT . $path, 0755);
 				move_uploaded_file($file['tmp_name'], WWW_ROOT . $path
 					. $model->data[$model->alias][$field . "_file"]['name']);
 				//$model->data[$model->alias][$field . '_file']['path'] = '/app/webroot/' . $path;
 				$this->saveFileData($model->alias, $field, $extension, $path, $model->data[$model->alias]);
-				umask($oldmask);
 			}
 		}
 		$model->getEventManager()->dispatch(new CakeEvent($name, $model));
