@@ -195,7 +195,7 @@
 																				));?>
 																			</div> <!-- end of form-group -->
 																			<div class="form-group">
-																				<?php echo $this->Form->input('rib_file', array(
+																				<?php echo $this->Form->input('applicant_rib_file', array(
 																					'type' => 'file',
 																					'id' => 'bank_file',
 																					'label' => 'RIB personnel domicilié en France : <span class="glyphicon glyphicon-asterisk required"/>'

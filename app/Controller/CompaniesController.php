@@ -1,21 +1,21 @@
 <?php
 
 App::uses('Tools', 'Vendor');
+App::uses('NotifEventListener', 'Event');
 
 class CompaniesController extends AppController {
 	public $name = 'Companies';
 	public $helpers = array('Html', 'Form');
+	public $uses = array('Company', 'Applicant', 'Profile', 'File');
 	private $itemPerPage = 5;
 
 	function beforeFilter() {
 		parent::beforeFilter();
-		$this->Auth->allow('show_company', 'edit_company', 'inscription', 'allow', 'deny');
+		$this->Auth->allow('show_company', 'show_applicants', 'edit_company', 'inscription', 'allow', 'deny');
 	}
 
 	public function index($page = 1) {
-		// $this->loadModel('Applicant');
 		$this->set('companies', $this->Company->find('all'));
-		//debug($this->Company->find('all')); die();
 		$this->set('itemPerPage', $this->itemPerPage);
 		if ($page == 1) {
 			$this->set('pages', array($page => true, $page + 1 => false, $page + 2 => false));
@@ -25,16 +25,13 @@ class CompaniesController extends AppController {
 	}
 
 	public function edit_company() {
-		$this->loadModel('Applicant');
-		// App::uses('NotifEventListener', 'Event');
-		// $this->Company->getEventManager()->attach(new NotifEventListener());
+		$this->Company->getEventManager()->attach(new NotifEventListener());
 		$id = $this->Session->read("Applicant.id");
 		$applicant = $this->Applicant->find('first', array('conditions' => array('Applicant.id' => $id)));
-		//debug($applicant); die();
 		if (isset($id) && !empty($applicant)) {
 			if ($this->request->is(array('post', 'put'))) {
-				//debug($this->request->data); die();
 				$this->request->data['Company']['upload_owner'] = $id;
+				$this->request->data['Company']['company_id'] = $applicant['Company']['id'];
 				$this->request->data['Company']['id'] = $applicant['Company']['id'];
 				$this->request->data['Company']['creation_date'] = date("Y-m-d",
 					strtotime($this->request->data['Company']['creation_date']));
@@ -77,58 +74,73 @@ class CompaniesController extends AppController {
 		}
 	}
 
-	public function show_company() {
-		$this->layout = null;
-		if ($this->request->is('ajax')) {
-			if (!empty($this->request->data['Company']['id'])) {
-				$company =  $this->Company->findById($this->request->data['Company']['id'], array('recursive' => 0));
-				if (!empty($company)) {
-					$company['Company']['address'] = $company['Company']['street_number'] . ', ' . $company['Company']['street_name'] . ' ' . $company['Company']['zip_code'] . ' ' . $company['Company']['city_name'];
-					$company['Company']['creation_date'] = date("d-m-Y", strtotime($company['Company']['creation_date']));
-					$company['Company']['capital'] = ($company['Company']['capital']) ? 'Oui' : 'Non';
-					$company['Company']['account'] = ($company['Company']['account']) ? 'Oui' : 'Non';
-					Tools::unsetFromArray($company['Company'], array(
-						'event_id',
-						'zip_code',
-						'street_name',
-						'street_number',
-						'city_name'
-						));
-					$this->set('company', $company);
-					$this->loadModel('Applicant');
-					$applicants = $this->Applicant->find('all', array('conditions' => array('company_id' => $this->request->data['Company']['id'])));
-					if (!empty($applicants)) {
-						foreach ($applicants as $key => &$value) {
-							Tools::unsetFromArray($applicants[$key], array(
-								'Company',
-								'Applicant'
-								));
-							$value['Profile']['address'] = $value['Profile']['street_number'] . ', ' . $value['Profile']['street_name'] . ' ' . $value['Profile']['zip_code'] . ' ' . $value['Profile']['city_name'];
-							$value['Profile']['birthdate'] = date("d-m-Y", strtotime($value['Profile']['birthdate']));
-							$value['Profile']['is_payed'] = ($value['Profile']['is_payed']) ? 'Oui' : 'Non';
-						}
-						$this->set('applicants', $applicants);
-					}
+	public function show_company($id = 0) {
+		if ($id > 0) {
+			$this->Session->write('Company.id', $id);
+		} else {
+			$id = $this->Session->read('Company.id');
+		}
+		$this->Company->recursive = 0;
+		$Company = $this->Company->find('first', array('conditions' => array('Company.id' => $id)));
+		$this->set('Company', $Company['Company']);
+	}
+
+	public function show_applicants() {
+		$id = $this->Session->read('Company.id');
+		if ($id > 0) {
+			$Profiles = $this->Profile->find('all', array(
+				'conditions' => array('Profile.company_id' => $id)
+				));
+			$this->set('Applicants', $Profiles);
+		}
+	}
+
+	public function company_files() {
+		$id = $this->Session->read('Company.id');
+		if ($id > 0) {
+			$this->File->recursive = 0;
+			$Files = $this->File->find('all', array(
+				'conditions' => array('File.category' => 'Company', 'File.company_id' => $id)
+				));
+			$this->set('Files', $Files);
+		}
+	}
+
+	public function applicant_files() {
+		$id = $this->Session->read('Company.id');
+		if ($id > 0) {
+			$this->File->recursive = 0;
+			$Company = $this->Company->find('first', array(
+				'conditions' => array('Company.id' => $id)
+				));
+			$data = array();
+			foreach ($Company['Profile'] as $key => $value) {
+				$Files = $this->File->find('all', array(
+				'conditions' => array(
+					'File.category' => 'Profile',
+					'File.company_id' => $id,
+					'File.concerned_id' => $value['id']
+					)
+				));
+				$data[$key]['Profile'] = $value;
+				$data[$key]['Files'] = array();
+				foreach ($Files as $value) {
+					array_push($data[$key]['Files'], $value['File']);
 				}
 			}
-		} 
+			//debug($data); die();
+			$this->set('Files', $data);
+		}
 	}
 
 	public function allow() {
 		$this->autoRender = false;
 		if ($this->request->is('ajax')) {
-			if (!empty($this->request->data['Company']['data'])) {
-				$data = explode('@', $this->request->data['Company']['data']);
-				if (count($data) == 3) { 
-					$company = $this->Company->find('first', array('conditions' => array(
-						'Company.id' => $data[0]
-						), 'recursive' => 0));
-					if (!empty($company) && !$company['Company']['is_' . $data[1] . '_valid']) {
-						$this->Company->id = $data[0];
-						$this->Company->saveField('is_' . $data[1] . '_valid', true);
-						return json_encode(true);
-					}
-				}
+			//return json_encode($this->request->data);
+			$id = $this->request->data['File']['id'];
+			if (!empty($id)) {
+				$this->File->updateAll(array('File.is_valid' => 1), array('File.id' => $id));
+				return json_encode(true);
 			}
 		}
 		return json_encode(false);
@@ -137,18 +149,11 @@ class CompaniesController extends AppController {
 	public function deny() {
 		$this->autoRender = false;
 		if ($this->request->is('ajax')) {
-			if (!empty($this->request->data['Company']['data'])) {
-				$data = explode('@', $this->request->data['Company']['data']);
-				if (count($data) == 3) { 
-					$company = $this->Company->find('first', array('conditions' => array(
-						'Company.id' => $data[0]
-						), 'recursive' => 0));
-					if (!empty($company) && $company['Company']['is_' . $data[1] . '_valid']) {
-						$this->Company->id = $data[0];
-						$this->Company->saveField('is_' . $data[1] . '_valid', false);
-						return json_encode(true);
-					}
-				}
+			//return json_encode($this->request->data);
+			$id = $this->request->data['File']['id'];
+			if (!empty($id)) {
+				$this->File->updateAll(array('File.is_valid' => 0), array('File.id' => $id));
+				return json_encode(true);
 			}
 		}
 		return json_encode(false);

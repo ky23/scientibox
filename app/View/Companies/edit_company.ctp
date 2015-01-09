@@ -134,15 +134,13 @@
                       <div class="form-group">
                         <?php echo $this->Form->input('kbis_file', array(
                           'type' => 'file',
-                          // 'name' => 'kbis_file',
                           'id' => 'kbis_file',
                           'label' => 'Extrait Kbis de la société : <span class="glyphicon glyphicon-asterisk required"/>'
                           )); ?>
                         </div> <!-- end of form-group -->
                          <div class="form-group">
-                        <?php echo $this->Form->input('rib_file', array(
+                        <?php echo $this->Form->input('company_rib_file', array(
                           'type' => 'file',
-                          // 'name' => 'kbis_file',
                           'id' => 'rib_file',
                           'label' => 'RIB de la société : <span class="glyphicon glyphicon-asterisk required"/>'
                           )); ?>

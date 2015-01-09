@@ -10,8 +10,8 @@ class ProfilesController extends AppController {
 
 	public function edit_profile() {
 		$this->loadModel('Applicant');
-		// App::uses('NotifEventListener', 'Event');
-		// $this->Profile->getEventManager()->attach(new NotifEventListener());
+		App::uses('NotifEventListener', 'Event');
+		$this->Profile->getEventManager()->attach(new NotifEventListener());
 		$id = $this->Session->read("Applicant.id");
 		$applicant = $this->Applicant->find('first',
 			array('conditions' => array('Applicant.id' => $id)));

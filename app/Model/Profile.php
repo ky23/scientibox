@@ -7,7 +7,7 @@ class Profile extends AppModel {
 			'fields' => array(
 				'work_certificate' => 'files/UploadedFiles/%company/%applicant',
 				'id_card' => 'files/UploadedFiles/%company/%applicant',
-				'rib' => 'files/UploadedFiles/%company/%applicant',
+				'applicant_rib' => 'files/UploadedFiles/%company/%applicant',
 				'proof_home' => 'files/UploadedFiles/%company/%applicant',
 				'accommodation_certificate' => 'files/UploadedFiles/%company/%applicant',
 				'accommodating_id_card' => 'files/UploadedFiles/%company/%applicant'

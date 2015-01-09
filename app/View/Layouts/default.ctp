@@ -129,5 +129,8 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 		));?>
 		<!-- Print out cached javascripts -->
 		<?php echo $this->Js->writeBuffer(); ?>
+		<?php
+	    // echo $this->element('sql_dump');
+		?>
 	</body>
 	</html>

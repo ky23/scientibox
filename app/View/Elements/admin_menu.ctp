@@ -12,7 +12,7 @@
             </li>
             <li class="<?php echo (!empty($this->params['action']) && ($this->params['action'] == 'index') && $this->params['controller'] == 'notifications')?'active' : 'inactive' ?>">
                 <?php echo $this->Html->link('<span id="notifications" class="label label-danger">0</span> Notifications',
-                array('controller' => 'notifications', 'action' => 'index'), array('escape' => false));?>
+                array('controller' => 'notifications', 'action' => 'authentication_notifs'), array('escape' => false));?>
             </li>
         </ul>
     </div> <!-- end of menu -->

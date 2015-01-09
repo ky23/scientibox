@@ -6,7 +6,7 @@ class Company extends AppModel {
 		'Upload.Upload' => array(
 			'fields' => array(
 				'kbis' => 'files/UploadedFiles/%company',
-				'rib' => 'files/UploadedFiles/%company',
+				'company_rib' => 'files/UploadedFiles/%company',
 				'associates' => 'files/UploadedFiles/%company'
 				)
 			)

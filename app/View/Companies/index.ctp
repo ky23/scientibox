@@ -23,7 +23,9 @@
 				<td><?php echo $companies[$i]['Company']['name']; ?></td>
 				<td><?php echo $companies[$i]['Company']['contact']; ?></td>
 				<td><?php echo $companies[$i]['Company']['status']; ?></td>
-				<td><span class="glyphicon glyphicon-search" id="<?php echo $companies[$i]['Company']['id']; ?>"></span></td>
+				<td><?php echo $this->Html->link('<span class="glyphicon glyphicon-search"></span>',
+				array('action' => 'show_company', $companies[$i]['Company']['id']),
+				array('escape' => false, 'target' => '_blank')); ?></td>
 				<td><span class="glyphicon glyphicon-envelope"></span></td>
 				<td><span class="glyphicon glyphicon-ok"></span></td>
 				<td><span class="glyphicon glyphicon-remove" id="show"></span></td>
@@ -41,5 +43,3 @@
 <li><?php echo $this->Html->link('&raquo', array('action' => 'index', array_search(true, $pages) + 1), array('escape' => false)); ?></li>
 </ul>
 </div> <!-- end of data-form -->
-<?php echo $this->element('dialog_show_company'); ?>
-<?php echo $this->Html->script(array('dialog-show-company')); ?>
