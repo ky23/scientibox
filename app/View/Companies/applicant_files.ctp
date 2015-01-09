@@ -20,9 +20,7 @@
 					<?php foreach ($value['Files'] as $key => $item): ?>
 					<tr>
 						<td><?php echo $item['type']; ?></td>
-						<td><?php echo $this->Html->link($item['name'],
-						$_SERVER['HTTP_HOST'] . '/scientibox/' . $item['path'] . $item['name'],
-						array('class' => 'file_link', 'target' => '_blank')); ?></td>
+						<td><a href="<?php echo $_SERVER['HTTP_HOST'] . '/scientibox/' . $item['path'] . $item['name']; ?>" target="_blank" class="file_link"><?php echo $item['name']; ?></a></td>
 						<?php if ($item['is_valid']): ?>
 						<td><div class="custom"><span class="glyphicon glyphicon-ok"></span></div></td>
 					<?php else: ?>
