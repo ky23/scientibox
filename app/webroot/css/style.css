@@ -250,6 +250,10 @@
 					background-color: #00313b;
 				}
 
+				#btn-logout {
+					position: static !important;
+				}
+
 				@media only screen and (max-width: 320px) {
 					.logo h2 {
 						display: none;

@@ -61,8 +61,8 @@ class AppController extends Controller {
 
 	function beforeFilter() {
 		$this->set('logged_in', $this->Auth->loggedIn());
-		// if ($this->Auth->loggedIn()) {
+		if ($this->Auth->loggedIn()) {
 			$this->Auth->allow();
-		// }		
+		}		
 	}
 }

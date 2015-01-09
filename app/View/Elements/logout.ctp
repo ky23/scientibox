@@ -1,4 +1,4 @@
-<div class="btn-group" >
+<div id="btn-logout" class="btn-group" >
 	<button type="button" id="admin-button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
 		Admin <span class="caret"></span>
 	</button>
