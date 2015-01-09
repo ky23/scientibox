@@ -63,7 +63,7 @@ class NotifEventListener implements CakeEventListener {
 	private function getChangedFields($oldData, $newData) {
 		$changedFields = array();
 		foreach($oldData as $field => $value) {
-			if ($newData[$field] != null && $value != null && $newData[$field] != $value) {
+			if (isset($newData[$field]) && isset($value) && $newData[$field] != $value) {
 				if ($field == 'creation_date' || $field == 'birthdate' || $field == 'closing_date') {
 					$changedFields[$field]['oldValue'] = date("d-m-Y", strtotime($value));
 					$changedFields[$field]['newValue'] = date("d-m-Y", strtotime($newData[$field]));
