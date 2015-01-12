@@ -1,6 +1,6 @@
 <?php
 
-App::import('File','Model');
+App::import('Model','File');
 
 class UploadBehavior extends ModelBehavior {
 	private $options = array();
