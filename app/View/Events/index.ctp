@@ -1,5 +1,8 @@
 
 <?php echo $this->element('Menus/admin_menu'); ?>
+<?php
+CakeSession::write('Event.id', $id);
+?>
 <div class="data-form">
     <table class="table table-hover"> 
         <thead>
