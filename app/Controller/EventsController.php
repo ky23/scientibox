@@ -36,19 +36,17 @@ class EventsController extends AppController {
 	public function add() {
 		$this->autoRender = false;
 		if ($this->request->is('post', 'put')) {
-			debug($this->request->data); die();
 			if ($this->Session->check('Event.id') && strcasecmp($this->Session->read('Event.id'), $this->request->data['id']) === 0) {
 				$event_to_edit = $this->Event->find('first', array('conditions' => array('Event.id' => $this->request->data['id'])));
 				if (!empty($event_to_edit)) {
 					$this->Event->id = $this->request->data['id'];
-				} else {
+				} else {	
 					return $this->redirect(array('action' => 'index'));
 				}
 			} else {
 				$this->Event->create();
 			}
 			$this->request->data['date'] = date("Y-m-d", strtotime($this->request->data['date']));
-			debug($this->request->data); die();
 			if ($this->Event->save($this->request->data)) {
 					//$this->Session->setFlash(__('Your post has been saved.'));`
 				return $this->redirect(array('action' => 'index'));
