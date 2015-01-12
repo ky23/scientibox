@@ -29,7 +29,7 @@ CakeSession::write('Event.id', $id);
             <tr class="<?php echo ($i % 2) ? 'colored' : 'uncolored' ?>">
                 <td><?php echo $events[$i]['Event']['name']; ?></td>
                 <td><?php 
-                $address = $events[$i]['Event']['street_number'] . ", " . $events[$i]['Event']['street_name'] . " " . $events[$i]['Event']['zip_code'] . " " . $events[$i]['Event']['city_name'];
+                $address = $events[$i]['Event']['street_name'] . " " . $events[$i]['Event']['zip_code'] . " " . $events[$i]['Event']['city_name'];
                 echo $address; ?></td>
                 <td><?php echo $events[$i]['Event']['date'] . " / " . $events[$i]['Event']['start_time']; ?></td>
                 <td><?php echo $events[$i]['Event']['date'] . " / " . $events[$i]['Event']['end_time']; ?></td>
@@ -88,31 +88,39 @@ CakeSession::write('Event.id', $id);
         </div> <!-- end of col-md-4 -->
     </div> <!-- end of form-group -->
     <div class="form-group">
-        <label class="col-md-4 control-label">Adresse du lieu :</label>
-        <div class="col-md-12"> 
-            <div class="col-md-6">
-              <label for="street_number" class="col-md-6 control-label">N° Rue/Bd/Av :</label>
-              <div class="col-md-6">
-                <input type="number" class="form-control" id="street_number" name="street_number" placeholder="N° Rue/Bd/Av" value="<?php echo $event_to_edit['Event']['street_number'] ?>"> 
-            </div> <!-- end of col-md-6 -->
-            <label for="street_name" class="col-md-6 control-label">Add :</label>
-            <div class="col-md-6"> 
-                <input type="text" class="form-control" id="street_name" name="street_name" placeholder="Nom de la Rue/Bd/Av" value="<?php echo $event_to_edit['Event']['street_name']?>">
-            </div> <!-- end of col-md-6 -->
-        </div> <!-- end of col-md-6 -->
-        <div class="col-md-6"> 
-           <label for="zip_code" class="col-md-6 control-label">CP :</label>
-           <div class="col-md-6"> 
-             <input type="number" class="form-control" id="zip_code" name="zip_code" placeholder="Code postal" value="<?php echo $event_to_edit['Event']['zip_code'] ?>">
-         </div> <!-- end of col-md-6 -->
-         <label for="city_name" class="col-md-6 control-label">Ville :</label>
-         <div class="col-md-6"> 
-           <input type="text" class="form-control" id="city_name" name="city_name" placeholder="Nom de la ville" value="<?php echo $event_to_edit['Event']['city_name'] ?>">
-       </div> <!-- end of col-md-6 -->
-   </div> <!-- end of col-md-6 -->
-</div> <!-- end of col-md-12 -->
-</div> <!-- end of form-group -->
-<div class="form-group">
+        <label class="col-sm-2  control-label">Adresse :</label>
+        <div class="col-sm-3"> 
+          <?php echo $this->Form->input('Event.street_name', array(
+           'type' => 'text',
+           'label' => 'Rue/Bd/Av',
+           'class' => 'form-control',
+           'placeholder' => 'Nom de la Rue/Bd/Av',
+           'value' => $event_to_edit['Event']['street_name'],
+           'id' => 'street_name'
+           )); ?> 
+       </div> <!-- end of col-sm-3 -->
+       <div class="col-sm-2"> 
+        <?php echo $this->Form->input('Event.zip_code', array(
+         'type' => 'text',
+         'label' => 'Code postal',
+         'class' => 'form-control',
+         'value' => $event_to_edit['Event']['zip_code'],
+         'placeholder' => 'Code postal',
+         'id' => 'zip_code'
+         )); ?> 
+     </div> <!-- end of col-sm-2 -->
+     <div class="col-sm-3"> 
+        <?php echo $this->Form->input('Event.city_name', array(
+         'type' => 'text',
+         'label' => 'Ville',
+         'class' => 'form-control',
+         'value' => $event_to_edit['Event']['city_name'],
+         'placeholder' => 'Nom de la ville',
+         'id' => 'city_name'
+         )); ?>  
+     </div> <!-- end of col-sm-3 -->
+ </div> <!-- end of form-group -->
+ <div class="form-group">
     <label for="seat_number" class="col-md-4 control-label">Nombre de places :</label>
     <div class="col-md-4">
         <input type="number" class="form-control" id="seat_number" name="seat_number" value="<?php echo $event_to_edit['Event']['seat_number']; ?>">
@@ -129,7 +137,7 @@ CakeSession::write('Event.id', $id);
 <div class="form-group">
     <?php echo $this->Form->end(array(
         'label' => 'Enregistrer',
-        'id' => 'submit-button'
+        'id' => 'next-button'
         ));?>
     </div> <!-- end of form-group -->
 </div> <!-- end of data-form -->

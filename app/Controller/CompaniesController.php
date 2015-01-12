@@ -213,7 +213,7 @@ class CompaniesController extends AppController {
 			$dateObject = array();
 			$dateObject['Aucune'] = 'Aucune';
 			foreach ($events as $evt) {
-				$dateObject["Le " . $evt['Event']['date'] . " à " . $evt['Event']['start_time'] . " : " . $evt['Event']['name']] = $evt['Event']['street_number'] . ", " . $evt['Event']['street_name'] . " " . $evt['Event']['zip_code'] . " " . $evt['Event']['city_name'];
+				$dateObject["Le " . $evt['Event']['date'] . " à " . $evt['Event']['start_time'] . " : " . $evt['Event']['name']] = $evt['Event']['street_name'] . " " . $evt['Event']['zip_code'] . " " . $evt['Event']['city_name'];
 			}
 			$this->set('dates', $dateObject);
 			return;

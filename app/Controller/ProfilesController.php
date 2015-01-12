@@ -2,6 +2,7 @@
 
 class ProfilesController extends AppController {
 	public $name = 'Profiles';
+	public $uses = array('Company', 'Applicant', 'Profile');
 
 	function beforeFilter() {
 		parent::beforeFilter();
@@ -9,7 +10,6 @@ class ProfilesController extends AppController {
 	}
 
 	public function edit_profile() {
-		$this->loadModel('Applicant');
 		App::uses('NotifEventListener', 'Event');
 		$this->Profile->getEventManager()->attach(new NotifEventListener());
 		$id = $this->Session->read("Applicant.id");
@@ -109,11 +109,13 @@ class ProfilesController extends AppController {
 
 	public function warrantly() {
 		$id = $this->Session->read("Applicant.id");
-		if (isset($id)) {
-			// $this->loadModel('Applicant');
-			// $applicant = $this->Applicant->find('first', array('conditions' => array('Applicant.id' => $id)));
-			// $applicants = $this->Applicant->find('all', array('conditions' => array('company_id' => $applicant['Company']['id'])));
-			// $this->set('applicants', $applicants);
+		$applicant = $this->Applicant->find('first',
+			array('conditions' => array('Applicant.id' => $id)));
+		if (!empty($applicant)) {
+			$applicants = $this->Applicant->find('all', array(
+				'conditions' => array('Applicant.company_id' => $applicant['Company']['id'])
+				));
+			$this->set('applicants', $applicants);
 		} else {
 			return $this->redirect(array('controller' => 'home', 'action' => 'index'));
 		}
