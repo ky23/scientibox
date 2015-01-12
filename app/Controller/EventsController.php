@@ -56,10 +56,12 @@ class EventsController extends AppController {
 		}
 	}
 
-	public function delete($id) {
+	public function delete() {
 		$this->autoRender = false;
-		if ($this->request->is('get')) {
-			throw new MethodNotAllowedException();
+		$page = (!empty($this->params['named']) && $this->params['named']['page']) ? ($this->params['named']['page']) : 1;
+		$id = (!empty($this->params['named']) && $this->params['named']['id']) ? ($this->params['named']['id']) : null; 
+		if (!$id) {
+			throw new NotFoundException(__('Evènement non valide.'));
 		}
 		$event_to_delete = $this->Event->findById($id);
 		if (!$event_to_delete) {
