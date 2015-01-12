@@ -13,8 +13,7 @@
  						<div class="input-group">
  							<span class="input-group-addon glyphicon glyphicon-user"></span>
  							<?php echo $this->Form->input('Admin.username', array(
- 								'placeholder' =>
- 								'abc@exemple.com',
+ 								'placeholder' => 'abc@exemple.com',
  								'id' => 'email',
  								'class' => 'form-control',
  								'label' => false,

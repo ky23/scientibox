@@ -35,7 +35,9 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 		'https://maps.googleapis.com/maps/api/js?sensor=false',
 		'cakebootstrap',
 		'bootstrap.min',
-		'jquery-ui.min'
+		'jquery-ui.min',
+		'bootstrap-multiselect',
+		'stupidtable.min'
 		));
 	echo $this->Html->css(array(
 		// 'cake.generic',
@@ -45,6 +47,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 		'jquery-ui.structure.min',
 		'jquery-ui.theme.min',
 		'style',
+		'bootstrap-multiselect'
 		));
 	echo $this->Html->meta('icon');
 	echo $this->fetch('meta');

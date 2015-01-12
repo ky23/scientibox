@@ -40,23 +40,17 @@ class Company extends AppModel {
 			'allowEmpty' => true,
 			'message' => 'Veuillez vérifier le site web'
 			),
-		'siret' => array(
+		'siren' => array(
 			'rule' => 'numeric',
 			'required' => false,
 			'allowEmpty' => true,
-			'message' => 'Veuillez vérifier le siret'
+			'message' => 'Veuillez vérifier le siren'
 			),
 		'naf_code' => array(
 			'rule' => 'alphaNumeric',
 			'required' => false,
 			'allowEmpty' => true,
 			'message' => 'Veuillez vérifier le code naf'
-			),
-		'social_capital' => array(
-			'rule' => 'numeric',
-			'required' => false,
-			'allowEmpty' => true,
-			'message' => 'Veuillez vérifier le capital social'
 			),
 		'contact' => array(
 			'rule' => 'email',
@@ -75,12 +69,6 @@ class Company extends AppModel {
 			'required' => false,
 			'allowEmpty' => true,
 			'message' => 'Veuillez vérifier la date de création'
-			),
-		'street_number' => array(
-			'rule' => 'numeric',
-			'required' => false,
-			'allowEmpty' => true,
-			'message' => 'Veuillez vérifier le numéro de rue'
 			),
 		'street_name' => array(
 			'rule' => array('custom', '/^[-a-z0-9, ]*$/i'),
@@ -107,18 +95,33 @@ class Company extends AppModel {
 			'message' => 'Veuillez vérifier le total des actions'
 			),
 		'kbis_file' => array(
-			'rule' => array('extension', array('pdf', 'doc', 'docx', 'odt', 'png', 'jpg', 'JPEG', 'PNG', 'xls', 'xlsx')),
-			'required' => false,
-			'allowEmpty' => true,
-			'message' => 'Veuillez vérifier le type de fichier'
+			'extension' => array(
+				'rule' => array('extension', array('pdf', 'doc', 'docx', 'odt', 'png', 'jpg', 'JPEG', 'PNG', 'xls', 'xlsx')),
+				'required' => false,
+				'allowEmpty' => true,
+				'message' => 'Veuillez vérifier le type du fichier'),
+			'fileSize' => array(
+				'rule' => array('fileSize', '<=', '5MB'),
+				'required' => false,
+				'allowEmpty' => true,
+				'message' => 'Veuillez vérifier la taille du fichier')
 			),
-		'associates_file' => array(
+		'company_rib_file' => array(
 			'rule' => array('extension', array('pdf', 'doc', 'docx', 'odt', 'png', 'jpg', 'JPEG', 'PNG', 'xls', 'xlsx')),
 			'required' => false,
 			'allowEmpty' => true,
-			'message' => 'Veuillez vérifier le type de fichier'
+			'message' => 'Veuillez vérifier le type du fichier'
 			)
 		);
+
+function checkSize($data){
+	die('termingo');
+	$data = array_shift($data);
+	if ($data['size'] == 0 || $data['size'] > 12){
+		return false;
+	}
+	return true;
+}
 }
 
 ?>

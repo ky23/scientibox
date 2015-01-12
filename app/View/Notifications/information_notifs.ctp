@@ -1,6 +1,7 @@
-<?php echo $this->element('admin_menu'); ?>
+<?php echo $this->element('Menus/admin_menu'); ?>
 <div class="data-form">
-	<?php echo $this->element('notification_menu'); ?>
+	<?php echo $this->element('company_search'); ?>
+	<?php echo $this->element('Menus/notification_menu'); ?>
 	<h2>Informations</h2>
 	<div id="information">
 		<?php  echo $this->Form->create('Informations',
@@ -9,23 +10,25 @@
 			<thead>
 				<tr>
 					<th><input type="checkbox" name="toDelete[]" onchange="checkAll(this)"></th>
-					<th>Société</th>
-					<th>Demandeur</th>
+					<th class="sortable" data-sort="string">Société</th>
+					<th class="sortable" data-sort="string">Demandeur</th>
 					<th>Date et heure</th>
-					<th>Page modifiée</th>
-					<th>Champs modifié</th>
+					<th class="sortable" data-sort="string">Page modifiée</th>
+					<th class="sortable" data-sort="string">Champs modifié</th>
 					<th>Ancienne valeur</th>
 					<th>Nouvelle valeur</th>
 				</tr> 
 			</thead>
 			<tbody>
-				<?php $page = array_search(true, $pages);
+				<?php
+				$itemPerPage = Configure::read('ItemPerPage');
+				$page = array_search(true, $pages);
 				$max = (($itemPerPage * $page - 1) < count($data) - 1) ?
 				($itemPerPage * $page - 1) : count($data) - 1;
 				for ($i = ($page - 1) * $itemPerPage; $i <= $max; ++$i): ?>
 				<tr class="<?php echo ($i % 2) ? 'colored' : 'uncolored' ?>">
 					<td><input type="checkbox" name="toDelete[]" value ="<?php echo $data[$i]['id'];?>" hiddenField = "false"></td>
-					<td><?php echo $data[$i]['Company']; ?></td>
+					<td class="company_name"><?php echo $data[$i]['Company']; ?></td>
 					<td><?php echo $data[$i]['Applicant']; ?></td>
 					<td><?php echo $data[$i]['date']; ?></td>
 					<td><?php echo $data[$i]['table_name']; ?></td>

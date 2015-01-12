@@ -27,11 +27,17 @@ class Profile extends AppModel {
 			'allowEmpty' => true,
 			'message' => 'Veuillez vérifier votre nom'
 			),
-		'email' => array(
+		'pro_email' => array(
 			'rule' => 'email',
 			'required' => false,
 			'allowEmpty' => true,
-			'message' => 'Veuillez vérifier votre adresse email'
+			'message' => 'Veuillez vérifier votre adresse email personnel'
+			),
+		'perso_email' => array(
+			'rule' => 'email',
+			'required' => false,
+			'allowEmpty' => true,
+			'message' => 'Veuillez vérifier votre adresse email professionnel'
 			),
 		'phone' => array(
 			'rule' => 'numeric',

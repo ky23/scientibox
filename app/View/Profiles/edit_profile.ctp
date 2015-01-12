@@ -1,4 +1,4 @@
-<?php echo $this->element('applicant_menu'); ?>
+<?php echo $this->element('Menus/applicant_menu'); ?>
 <div class="data-form">
 	<div id="tabs">
 		<ul>

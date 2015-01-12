@@ -1,5 +1,5 @@
 
-<?php echo $this->element('admin_menu'); ?>
+<?php echo $this->element('Menus/admin_menu'); ?>
 <?php
 $key = md5(uniqid(rand(), true));
 CakeSession::write('Event.key', $key);

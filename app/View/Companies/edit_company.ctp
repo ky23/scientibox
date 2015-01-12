@@ -1,4 +1,4 @@
-<?php echo $this->element('applicant_menu'); ?>
+<?php echo $this->element('Menus/applicant_menu'); ?>
 <div class="data-form">
  <?php echo $this->Form->create('Company', array(
    'type' => 'file',
@@ -159,56 +159,8 @@
                          'id' => 'total_shares'
                          )); ?>
                        </div> <!-- end of form-group -->
-                       <div class="form-group">
-                         <table class="table table-hover">
-                          <thead>
-                            <tr> 
-                              <th>Associés demandeurs du prêt</th>
-                              <th>Nombre de parts</th>
-                              <th>Parts en %</th>
-                              <th>Affectation du prêt</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            <?php foreach ($applicants as $ind => $applicant): ?> 
-                            <tr class="<?php echo ($ind % 2) ? 'colored' : 'uncolored' ?>">
-                             <td><?php echo ($applicant['Profile']['first_name'] . " " . $applicant['Profile']['last_name'])?></td>
-                             <td>
-                              <?php echo $this->Form->input('Profile.' . $applicant['Profile']['id'] . '.shares', array(
-                               'type' => 'text',
-                               'label' => false,
-                               'class' => 'form-control',
-                               'placeholder' => 'Nombre d\'actions total',
-                               'id' => 'shares_' . $applicant['Profile']['id']
-                               )); ?>
-                             </td>
-                             <td>
-                              <div id="pourcentage_shares_<?php echo $applicant['Profile']['id'];?>"><?php 
-                              if ($total_shares) {
-                                echo round($applicant['Profile']['shares'] * 100 / $total_shares, 2);
-                              } else {
-                                echo 0;
-                              }
-                              ?></div>
-                            </td>
-                            <td>
-                             <?php echo $this->Form->input('Profile.' . $applicant['Profile']['id'] . '.loan_affectation', array(
-                              'type' => 'select',
-                              'label' => false,
-                              'class' => 'form-control',
-                              'id' => 'loan_affectation' . $applicant['Profile']['id'],
-                              // 'value' =>  $company_to_edit['legal_status'],
-                              'options' => array(
-                                'Capital' => 'Capital',
-                                'Compte courant' => 'Compte courant',
-                                'Compte courant bloqué' => 'Compte courant bloqué'
-                                ))); ?>
-                              </td>
-                            </tr>
-                          <?php endforeach; ?> <?php unset($applicants); ?>
-                        </tbody>
-                      </table>
-                    </div> <!-- end of form-group -->
+                      <?php echo $this->element('Tables/shares_table', $applicants); ?>
+                      <?php echo $this->element('Tables/loan_affectation_table', $applicants); ?>
                   </div> <!-- end of documents -->
                   <div class="form-group">
                     <?php echo $this->Form->radio('Company.is_bs_closed', array(

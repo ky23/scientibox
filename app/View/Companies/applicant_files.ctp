@@ -1,6 +1,6 @@
-<?php echo $this->element('admin_menu'); ?>
+<?php echo $this->element('Menus/admin_menu'); ?>
 <div class="data-form"> 
-	<?php echo $this->element('company_menu'); ?>
+	<?php echo $this->element('Menus/company_menu'); ?>
 	<h3>Documents des demandeurs</h3>
 	<div id="applicants">
 		<?php foreach ($Files as $key => $value): ?>
@@ -19,7 +19,7 @@
 				<tbody>
 					<?php foreach ($value['Files'] as $key => $item): ?>
 					<tr>
-						<td><?php echo $item['type']; ?></td>
+						<td><?php echo Configure::read('Dictionary.' . $item['type']); ?></td>
 						<td><?php echo $this->Html->link($item['name'],
 						$item['path'] . $item['name'],
 						array('class' => 'file_link', 'target' => '_blank')); ?></td>

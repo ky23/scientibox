@@ -107,8 +107,20 @@
  			var array = $(this).attr('id').split('_');
  			var result = $(this).val() * 100 / $('#total_shares').val();
  			$('#pourcentage_shares_' + array[1]).text(result.toFixed(2));
- 			console.log($('pourcentage_shares_1').attr('id'));
+ 			if (result < 5) {
+ 				$('#pourcentage_shares_' + array[1]).parent().css({"background-color" : "#E84C3D", "color" : "white"});
+ 			} else {
+ 				$('#pourcentage_shares_' + array[1]).parent().css({"background-color" : "#3fc380", "color" : "white"});
+ 			}
  		});
+ 	});
+
+ 	$('[id*=pourcentage_shares]').each(function() {
+ 		if (parseFloat($(this).text()) < 5) {
+ 			$(this).parent().css({"background-color" : "#E84C3D", "color" : "white"});
+ 		} else {
+ 			$(this).parent().css({"background-color" : "#3fc380", "color" : "white"});
+ 		}
  	});
 
  	$('.upload-button-remove').click(function() {
@@ -124,21 +136,21 @@
  		});
  	});
 
- $('form').bind('submit', function(e) {
- 	var errors = $('form').find('.error-message').length;
- 	if (!($('#terms_company').is(':checked'))) {
- 		e.preventDefault();
- 		alert('Veuillez cocher la case certifiant l\'exactitude des informations renseignées');
- 		return false;
- 	}
- 	if (errors == 0) {
- 		return true;
- 	} else {
- 		e.preventDefault();
- 		alert('Veuillez corriger les informations incorrectes');
- 	}
+ 	$('form').bind('submit', function(e) {
+ 		var errors = $('form').find('.error-message').length;
+ 		if (!($('#terms_company').is(':checked'))) {
+ 			e.preventDefault();
+ 			alert('Veuillez cocher la case certifiant l\'exactitude des informations renseignées');
+ 			return false;
+ 		}
+ 		if (errors == 0) {
+ 			return true;
+ 		} else {
+ 			e.preventDefault();
+ 			alert('Veuillez corriger les informations incorrectes');
+ 		}
+ 	});
  });
-});
 
  function validates(object) {
  	//console.log('data%5B' + $('form').attr('id') + '%5D%5B' + $(object).attr('id') + '%5D=' + value + '&data%5BModel%5D%=' + $('form').attr('id'));

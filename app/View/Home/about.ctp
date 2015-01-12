@@ -6,7 +6,7 @@
             <span class="span">
                 La plateforme
                 <strong>
-                   <?php echo $this->Html->link('www.scientibox.com',
+                   <?php echo $this->Html->link('scientibox',
                    array('controller' => 'main', 'action' => 'index'));?>
                </strong>
                et les services présents sur cette page vous sont proposés par&nbsp;:

@@ -1,5 +1,5 @@
 
-<?php echo $this->element('applicant_menu'); ?>
+<?php echo $this->element('Menus/applicant_menu'); ?>
 <!-- <div class="main-body"> -->
     <!-- // <?php foreach ($applicants as $applicant): ?> -->
     <!-- <div class="col-md-12 seeker">  -->

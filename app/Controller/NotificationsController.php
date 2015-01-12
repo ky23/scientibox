@@ -5,26 +5,6 @@ App::uses('Tools', 'Vendor');
 class NotificationsController extends AppController {
 	public $name = 'Notifications';
 	public $uses = array('Authentication', 'File', 'Information', 'Applicant');
-	private $itemPerPage = 5;
-	private $actions = array(
-		'LO' => 'Connexion',
-		'SI' => 'Inscription',
-		'NL' => 'Nouveau token'
-		);
-	private $categories = array(
-		'Company' => 'Société',
-		'Profile' => 'Demandeur'
-		);
-	private $types = array(
-		'kbis' => 'KBIS de la société',
-		'company_rib' => 'RIB de la société',
-		'work_certificate' => 'Certificat de travail',
-		'id_card' => 'Pièce d\'identité',
-		'applicant_rib' => 'RIB du demandeur',
-		'proof_home' => 'Justificatif de domicile',
-		'accommodation_certificate' => 'Attestation d\'hébergement',
-		'accommodating_id_card' => 'Pièce d\'identité de l\'hébergeant'
-		);
 
 	public function authentication_notifs($page = 1) {
 		$this->Authentication->recursive = 2;
@@ -35,7 +15,6 @@ class NotificationsController extends AppController {
 			));
 		$this->set('data', $this->formatData($authentications, 'Authentication'));
 		$this->Authentication->updateAll(array('is_seen' => true), array('is_seen' => false));
-		$this->set('itemPerPage', $this->itemPerPage);
 		if ($page == 1) {
 			$this->set('pages', array($page => true, $page + 1 => false, $page + 2 => false));
 		} else {
@@ -52,7 +31,6 @@ class NotificationsController extends AppController {
 			));
 		$this->set('data', $this->formatData($files, 'File'));
 		$this->File->updateAll(array('is_seen' => true), array('is_seen' => false));
-		$this->set('itemPerPage', $this->itemPerPage);
 		if ($page == 1) {
 			$this->set('pages', array($page => true, $page + 1 => false, $page + 2 => false));
 		} else {
@@ -69,7 +47,6 @@ class NotificationsController extends AppController {
 			));
 		$this->set('data', $this->formatData($information, 'Information'));
 		$this->Information->updateAll(array('is_seen' => true), array('is_seen' => false));
-		$this->set('itemPerPage', $this->itemPerPage);
 		if ($page == 1) {
 			$this->set('pages', array($page => true, $page + 1 => false, $page + 2 => false));
 		} else {
@@ -87,16 +64,16 @@ class NotificationsController extends AppController {
 			$data[$key]['date'] = Tools::formatDate("d-m-Y H:i:s",
 				$value[$type]['date']);
 			if ($type == "Authentication") {
-				$data[$key]['action'] = $this->actions[$value[$type]['action']];
+				$data[$key]['action'] = Configure::read('Dictionary.' . $value[$type]['action']);
 				$data[$key]['ip'] = $value[$type]['connection_ip'];
 			} else if ($type == "File") {
-				$data[$key]['category'] = $this->categories[$value[$type]['category']];
-				$data[$key]['type'] = $this->types[$value[$type]['type']];
+				$data[$key]['category'] = Configure::read('Dictionary.' . $value[$type]['category']);
+				$data[$key]['type'] = Configure::read('Dictionary.' . $value[$type]['type']);
 				$data[$key]['path'] = $value[$type]['path'];
 				$data[$key]['name'] = $value[$type]['name'];
 			} else if ($type == "Information") {
 				$data[$key]['table_name'] = $value[$type]['table_name'];
-				$data[$key]['field_name'] = $value[$type]['field_name'];
+				$data[$key]['field_name'] =  Configure::read('Dictionary.' . $value[$type]['field_name']);
 				$data[$key]['old_value'] = $value[$type]['old_value'];
 				$data[$key]['new_value'] = $value[$type]['new_value'];
 			}

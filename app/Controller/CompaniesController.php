@@ -7,21 +7,54 @@ class CompaniesController extends AppController {
 	public $name = 'Companies';
 	public $helpers = array('Html', 'Form');
 	public $uses = array('Company', 'Applicant', 'Profile', 'File');
-	private $itemPerPage = 5;
 
 	function beforeFilter() {
 		parent::beforeFilter();
-		$this->Auth->allow('show_company', 'show_applicants', 'edit_company', 'inscription', 'allow', 'deny');
+		$this->Auth->allow(array(
+			'show_company',
+			'show_applicants',
+			'edit_company',
+			'inscription',
+			'allow',
+			'deny',
+			'send_email')
+		);
 	}
 
 	public function index($page = 1) {
-		$this->set('companies', $this->Company->find('all'));
-		$this->set('itemPerPage', $this->itemPerPage);
+		//debug(Configure::read('Dictionary.last_name')); die();
+		if ($this->request->is('ajax') && !empty($this->request->data)) {
+			//debug($this->request->data); die();
+			$this->set('companies', $this->Company->find('all', array(
+				'conditions' => array('Company.name LIKE' => '%' . $this->request->data['Search'] . '%'))
+			));
+		} else {
+			$this->set('companies', $this->Company->find('all'));
+		}
 		if ($page == 1) {
 			$this->set('pages', array($page => true, $page + 1 => false, $page + 2 => false));
 		} else {
 			$this->set('pages', array($page - 1 => false, $page => true, $page + 1 => false));
 		}
+	}
+
+	private function setLoanAffectation($data) {
+		$options = array('C' => 'Capital', 'CC' => 'Compte courant', 'CCB' => 'Compte courant bloqué');
+		$length = count($data);
+		$result = '';
+		foreach ($data as $key => $value) {
+			if ($key != $length - 1) {
+				$result .= $options[$value] . '|';
+			} else {
+				$result .= $options[$value];
+			}
+		}
+		return $result;
+	}
+
+	private function getLoanAffectation($data) {
+		$options = array('C' => 'Capital', 'CC' => 'Compte courant', 'CCB' => 'Compte courant bloqué');
+		return explode('|', $data);
 	}
 
 	public function edit_company() {
@@ -43,7 +76,7 @@ class CompaniesController extends AppController {
 					$tmp['id'] = $key;
 					$tmp['company_id'] = $applicant['Company']['id'];
 					$tmp['shares'] = $this->request->data['Profile'][$key]['shares'];
-					$tmp['loan_affectation'] = $this->request->data['Profile'][$key]['loan_affectation'];
+					$tmp['loan_affectation'] = $this->setLoanAffectation($this->request->data['Profile'][$key]['loan_affectation']);
 					array_push($data['Profile'], $tmp);
 				}
 				if ($this->Company->saveAssociated($data, array('validate' => false))) {
@@ -62,8 +95,8 @@ class CompaniesController extends AppController {
 					'conditions' => array('Applicant.company_id' => $applicant['Company']['id'])));
 				foreach ($applicants as $key => $value) {
 					$data['Profile'][$value['Profile']['id']]['shares'] = $value['Profile']['shares'];
-					$data['Profile'][$value['Profile']['id']]['loan_affectation'] =
-					$value['Profile']['loan_affectation'];
+					$data['Profile'][$value['Profile']['id']]['loan_affectation'] = $this->getLoanAffectation($value['Profile']['loan_affectation']);
+					$applicants[$key]['Profile']['loan_affectation'] = $this->getLoanAffectation($value['Profile']['loan_affectation']);
 				}
 				$this->request->data = $data;
 				$this->set('applicants', $applicants);
@@ -82,6 +115,7 @@ class CompaniesController extends AppController {
 		}
 		$this->Company->recursive = 0;
 		$Company = $this->Company->find('first', array('conditions' => array('Company.id' => $id)));
+		Tools::unsetFromArray($Company['Company'], array('id', 'uid', 'event_id'));
 		$this->set('Company', $Company['Company']);
 	}
 
@@ -91,6 +125,14 @@ class CompaniesController extends AppController {
 			$Profiles = $this->Profile->find('all', array(
 				'conditions' => array('Profile.company_id' => $id)
 				));
+			foreach ($Profiles as $key => $value) {
+				Tools::unsetFromArray($Profiles[$key]['Profile'], array(
+					'id',
+					'uid',
+					'applicant_id',
+					'company_id')
+				);
+			}
 			$this->set('Applicants', $Profiles);
 		}
 	}
@@ -116,12 +158,12 @@ class CompaniesController extends AppController {
 			$data = array();
 			foreach ($Company['Profile'] as $key => $value) {
 				$Files = $this->File->find('all', array(
-				'conditions' => array(
-					'File.category' => 'Profile',
-					'File.company_id' => $id,
-					'File.concerned_id' => $value['id']
-					)
-				));
+					'conditions' => array(
+						'File.category' => 'Profile',
+						'File.company_id' => $id,
+						'File.concerned_id' => $value['id']
+						)
+					));
 				$data[$key]['Profile'] = $value;
 				$data[$key]['Files'] = array();
 				foreach ($Files as $value) {
@@ -157,6 +199,10 @@ class CompaniesController extends AppController {
 			}
 		}
 		return json_encode(false);
+	}
+
+	public function send_email() {
+
 	}
 
 	public function inscription() {
