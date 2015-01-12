@@ -95,17 +95,10 @@ class Company extends AppModel {
 			'message' => 'Veuillez vérifier le total des actions'
 			),
 		'kbis_file' => array(
-			'extension' => array(
-				'rule' => array('extension', array('pdf', 'doc', 'docx', 'odt', 'png', 'jpg', 'JPEG', 'PNG', 'xls', 'xlsx')),
-				'required' => false,
-				'allowEmpty' => true,
-				'message' => 'Veuillez vérifier le type du fichier'),
-			'fileSize' => array(
-				'rule' => array('fileSize', '<=', '5MB'),
-				'required' => false,
-				'allowEmpty' => true,
-				'message' => 'Veuillez vérifier la taille du fichier')
-			),
+			'rule' => array('extension', array('pdf', 'doc', 'docx', 'odt', 'png', 'jpg', 'JPEG', 'PNG', 'xls', 'xlsx')),
+			'required' => false,
+			'allowEmpty' => true,
+			'message' => 'Veuillez vérifier le type du fichier'),
 		'company_rib_file' => array(
 			'rule' => array('extension', array('pdf', 'doc', 'docx', 'odt', 'png', 'jpg', 'JPEG', 'PNG', 'xls', 'xlsx')),
 			'required' => false,
