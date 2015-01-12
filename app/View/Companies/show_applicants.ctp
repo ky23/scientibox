@@ -20,7 +20,7 @@
 						<td><?php echo Configure::read('Dictionary.' . $key); ?></td>
 						<?php if (isset($item) && ($item == '1' || $item == '0')): ?>
 						<td><?php echo ($item == '1') ? 'Oui' : 'Non' ; ?></td>
-						<?php if ($item == '1'): ?>
+						<?php if ($item == '1' || $item == '0'): ?>
 						<td><div class="custom"><span class="glyphicon glyphicon-ok"></span></div></td>
 					<?php else: ?>
 					<td><div class="custom"><span class="glyphicon glyphicon-remove"></span></div></td>

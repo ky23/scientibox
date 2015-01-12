@@ -33,23 +33,31 @@
 					<td><?php echo $data[$i]['date']; ?></td>
 					<td><?php echo $data[$i]['table_name']; ?></td>
 					<td><?php echo $data[$i]['field_name']; ?></td>
-					<td><?php echo $data[$i]['old_value']; ?></td>
-					<td><?php echo $data[$i]['new_value']; ?></td>
-				</tr>
-			<?php endfor; ?>
-		</tbody>
-	</table>
-	<ul class="pagination">
-		<li><?php echo $this->Html->link('&laquo', array('action' => 'information_notifs',
-		array_search(true, $pages) - 1), array('escape' => false)); ?></li> 
-		<?php foreach ($pages as $ind => $is_page): ?>
-		<li class="<?php echo ($is_page) ? 'active' : 'inactive'; ?>"> 
-			<?php echo $this->Html->link($ind . '<span class="sr-only">(current)</span>',
-			array('action' => 'information_notifs', $ind), array('escape' => false)); ?>
-		</li>
-	<?php endforeach; ?>
-	<li><?php echo $this->Html->link('&raquo', array('action' => 'information_notifs',
-	array_search(true, $pages) + 1), array('escape' => false)); ?></li>
+					<?php if (isset($data[$i]['old_value']) && ($data[$i]['old_value'] == '1' || $data[$i]['old_value'] == '0')): ?>
+					<td><?php echo ($data[$i]['old_value'] == '1') ? 'Oui' : 'Non' ; ?></td>
+				<?php else: ?>
+				<td><?php echo $data[$i]['old_value']; ?></td>
+			<?php endif; ?>
+			<?php if (isset($data[$i]['new_value']) && ($data[$i]['new_value'] == '1' || $data[$i]['new_value'] == '0')): ?>
+			<td><?php echo ($data[$i]['new_value'] == '1') ? 'Oui' : 'Non' ; ?></td>
+		<?php else: ?>
+		<td><?php echo $data[$i]['new_value']; ?></td>
+	<?php endif; ?>
+</tr>
+<?php endfor; ?>
+</tbody>
+</table>
+<ul class="pagination">
+	<li><?php echo $this->Html->link('&laquo', array('action' => 'information_notifs',
+	array_search(true, $pages) - 1), array('escape' => false)); ?></li> 
+	<?php foreach ($pages as $ind => $is_page): ?>
+	<li class="<?php echo ($is_page) ? 'active' : 'inactive'; ?>"> 
+		<?php echo $this->Html->link($ind . '<span class="sr-only">(current)</span>',
+		array('action' => 'information_notifs', $ind), array('escape' => false)); ?>
+	</li>
+<?php endforeach; ?>
+<li><?php echo $this->Html->link('&raquo', array('action' => 'information_notifs',
+array_search(true, $pages) + 1), array('escape' => false)); ?></li>
 </ul>
 <input type="hidden" name="model" value ="Information">
 <?php echo $this->Form->end(array(

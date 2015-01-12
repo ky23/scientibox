@@ -17,7 +17,7 @@
 					<td><?php echo Configure::read('Dictionary.' . $key); ?></td>
 					<?php if (isset($value) && ($value == '1' || $value == '0')): ?>
 					  <td><?php echo ($value == '1') ? 'Oui' : 'Non' ; ?></td>
-					<?php if ($value == '1'): ?>
+					<?php if ($value == '1' || $value == '0'): ?>
 					<td><div class="custom"><span class="glyphicon glyphicon-ok"></span></div></td>
 				<?php else: ?>
 				<td><div class="custom"><span class="glyphicon glyphicon-remove"></span></div></td>
