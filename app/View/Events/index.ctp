@@ -1,10 +1,5 @@
 
 <?php echo $this->element('Menus/admin_menu'); ?>
-<?php
-$key = md5(uniqid(rand(), true));
-CakeSession::write('Event.key', $key);
-CakeSession::write('Event.id', $id);
-?>
 <div class="data-form">
     <table class="table table-hover"> 
         <thead>
@@ -132,7 +127,6 @@ CakeSession::write('Event.id', $id);
         <input type="number" class="form-control" id="seat_reserved" name="seat_reserved" value="<?php echo $event_to_edit['Event']['seat_reserved']; ?>">
     </div> <!-- end of col-md-4 -->
 </div> <!-- end of form-group -->
-<input type="text" style="visibility: hidden" id="key" name="key" value="<?php echo $key;?>"/>
 <input type="text" style="visibility: hidden" id="id" name="id" value="<?php echo $id;?>"/>
 <div class="form-group">
     <?php echo $this->Form->end(array(
