@@ -29,8 +29,16 @@
 								'required'
 								)); ?>
 							</div> <!-- end of form-group -->
+							<div class="form-group"> 
+								<select id="reasons" multiple="multiple" name="Company[reasons][]">
+									<option value="%reason1">Raison 1</option>";
+									<option value="%reason2">Raison 2</option>";
+									<option value="%reason3">Raison 3</option>";
+									<option value="%reason4">Raison 4</option>";
+								</select>
+							</div> <!-- end of form-group -->
 							<div class="form-group">
-								<?php echo $this->Form->input('Company.activity', array(
+								<?php echo $this->Form->input('Company.mail', array(
 									'type' => 'textarea',
 									'label' => 'Contenu',
 									'class' => 'form-control',
@@ -56,5 +64,18 @@
 						"save table contextmenu directionality emoticons template paste textcolor"
 						],
 						toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | l      ink image | print preview media fullpage | forecolor backcolor emoticons", 
+					});
+					$(document).ready(function() {
+						$("#reasons").multiselect({
+							onChange: function(element, checked) {
+								var content = tinyMCE.activeEditor.getContent();
+								if (checked) {
+									content = content.replace(element.val(), element.text());
+								} else {
+									content = content.replace(element.text(), element.val());
+								}
+								tinyMCE.activeEditor.setContent(content);
+							}
+						});
 					});
 					</script>

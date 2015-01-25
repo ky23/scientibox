@@ -201,8 +201,16 @@ class CompaniesController extends AppController {
 		return json_encode(false);
 	}
 
-	public function send_email() {
-
+	public function send_email($id = 0) {
+		if (!empty($id)) {
+			if ($this->request->is(array('post', 'put'))) {
+				//debug($this->request->data); die();
+			} else {
+				$this->request->data['Company']['username'] = "khatal.yacine@gmail.com";
+				$this->request->data['Company']['object'] = "Refus du dossier";
+				$this->request->data['Company']['mail'] = "<h2>Les raisons de refus: </h2></br><ul id=\"mail-reasons\"><li>%reason1</li><li>%reason2</li><li>%reason3</li><li>%reason4</li></ul>";
+			}
+		}
 	}
 
 	public function inscription() {

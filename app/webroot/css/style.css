@@ -88,6 +88,10 @@
 						outline:none;
 					}
 
+					.form-horizontal .radio, .form-horizontal .checkbox {
+						min-height: 50px;
+					}
+
 /*-----------------------------------------
 					body
 					-------------------------------------------*/
