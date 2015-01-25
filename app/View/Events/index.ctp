@@ -62,79 +62,86 @@ CakeSession::write('Event.id', $id);
         <h3>Merci de remplir les champs suivants afin de créer une nouvelle cérémonie :</h3> 
     </div> <!-- end of form-group -->
     <div class="form-group">
-        <label for="date" class="col-md-4 control-label">Date de la cérémonie :</label>
-        <div class="col-md-4">
-            <input type="text" class="form-control" id="event_date" name="date" value="<?php echo $event_to_edit['Event']['date']; ?>">
-        </div> <!-- end of col-md-4 -->
-    </div> <!-- end of form-group -->
-    <div class="form-group">
+     <?php echo $this->Form->input('Event.date', array(
+         'type' => 'text',
+         'label' => 'Date de la cérémonie :',
+         'class' => 'form-control',
+         'placeholder' => 'jj/mm/aaaa',
+         'id' => 'event_date',
+         'value' => $event_to_edit['Event']['date']
+         )); ?>
+     </div> <!-- end of form-group -->
+     <div class="form-group">
         <label for="start_time" class="col-md-4 control-label">Heure de début :</label>
-        <div class="col-md-4">
-            <input type="time" class="form-control" id="start_time" name="start_time" value="<?php echo $event_to_edit['Event']['start_time']; ?>">
-        </div> <!-- end of col-md-4 -->
+            <input type="time" class="form-control" name="data[Event][start_time]" value="<?php echo $event_to_edit['Event']['start_time']; ?>">
     </div> <!-- end of form-group -->
     <div class="form-group">
-        <label for="end_time" class="col-md-4 control-label">Heure de fin :</label>
-        <div class="col-md-4">
-            <input type="time" class="form-control" id="end_time" name="end_time" value="<?php echo $event_to_edit['Event']['end_time']; ?>">
-        </div> <!-- end of col-md-4 -->
-    </div> <!-- end of form-group -->
-    <div class="form-group">
-        <label for="name" class="col-md-4 control-label">Nom du lieu :</label>
-        <div class="col-md-4">
-            <input type="text" class="form-control" id="name" name="name" value="<?php echo $event_to_edit['Event']['name']; ?>" placeholder="Nom du lieu">
-        </div> <!-- end of col-md-4 -->
-    </div> <!-- end of form-group -->
-    <div class="form-group">
-        <label class="col-sm-2  control-label">Adresse :</label>
-        <div class="col-sm-3"> 
-          <?php echo $this->Form->input('Event.street_name', array(
-           'type' => 'text',
-           'label' => 'Rue/Bd/Av',
-           'class' => 'form-control',
-           'placeholder' => 'Nom de la Rue/Bd/Av',
-           'value' => $event_to_edit['Event']['street_name'],
-           'id' => 'street_name'
-           )); ?> 
-       </div> <!-- end of col-sm-3 -->
-       <div class="col-sm-2"> 
-        <?php echo $this->Form->input('Event.zip_code', array(
-         'type' => 'text',
-         'label' => 'Code postal',
-         'class' => 'form-control',
-         'value' => $event_to_edit['Event']['zip_code'],
-         'placeholder' => 'Code postal',
-         'id' => 'zip_code'
-         )); ?> 
-     </div> <!-- end of col-sm-2 -->
-     <div class="col-sm-3"> 
-        <?php echo $this->Form->input('Event.city_name', array(
-         'type' => 'text',
-         'label' => 'Ville',
-         'class' => 'form-control',
-         'value' => $event_to_edit['Event']['city_name'],
-         'placeholder' => 'Nom de la ville',
-         'id' => 'city_name'
-         )); ?>  
-     </div> <!-- end of col-sm-3 -->
- </div> <!-- end of form-group -->
- <div class="form-group">
-    <label for="seat_number" class="col-md-4 control-label">Nombre de places :</label>
-    <div class="col-md-4">
-        <input type="number" class="form-control" id="seat_number" name="seat_number" value="<?php echo $event_to_edit['Event']['seat_number']; ?>">
-    </div> <!-- end of col-md-4 -->
-</div> <!-- end of form-group -->
-<div class="form-group">
-    <label for="seat_reserved" class="col-md-4 control-label">Nombre de places réservées :</label>
-    <div class="col-md-4">
-        <input type="number" class="form-control" id="seat_reserved" name="seat_reserved" value="<?php echo $event_to_edit['Event']['seat_reserved']; ?>">
-    </div> <!-- end of col-md-4 -->
-</div> <!-- end of form-group -->
-<input type="text" style="visibility: hidden" id="id" name="id" value="<?php echo $id;?>"/>
-<div class="form-group">
-    <?php echo $this->Form->end(array(
-        'label' => 'Enregistrer',
-        'id' => 'next-button'
-        ));?>
-    </div> <!-- end of form-group -->
+       <label for="start_time" class="col-md-4 control-label">Heure de fin :</label>
+            <input type="time" class="form-control" name="data[Event][end_time]" value="<?php echo $event_to_edit['Event']['end_time']; ?>">
+        </div> <!-- end of form-group -->
+        <div class="form-group">
+           <?php echo $this->Form->input('Event.name', array(
+            'type' => 'text',
+            'label' => 'Nom du lieu :',
+            'class' => 'form-control',
+            'placeholder' => 'Nom du lieu',
+            'value' => $event_to_edit['Event']['name']
+            )); ?>
+        </div> <!-- end of form-group -->
+        <div class="form-group">
+            <label class="col-sm-2  control-label">Adresse :</label>
+            <div class="col-sm-3"> 
+              <?php echo $this->Form->input('Event.street_name', array(
+                 'type' => 'text',
+                 'label' => 'Rue/Bd/Av',
+                 'class' => 'form-control',
+                 'placeholder' => 'Nom de la Rue/Bd/Av',
+                 'value' => $event_to_edit['Event']['street_name'],
+                 'id' => 'street_name'
+                 )); ?> 
+             </div> <!-- end of col-sm-3 -->
+             <div class="col-sm-2"> 
+                <?php echo $this->Form->input('Event.zip_code', array(
+                   'type' => 'text',
+                   'label' => 'Code postal',
+                   'class' => 'form-control',
+                   'value' => $event_to_edit['Event']['zip_code'],
+                   'placeholder' => 'Code postal',
+                   'id' => 'zip_code'
+                   )); ?> 
+               </div> <!-- end of col-sm-2 -->
+               <div class="col-sm-3"> 
+                <?php echo $this->Form->input('Event.city_name', array(
+                   'type' => 'text',
+                   'label' => 'Ville',
+                   'class' => 'form-control',
+                   'value' => $event_to_edit['Event']['city_name'],
+                   'placeholder' => 'Nom de la ville',
+                   'id' => 'city_name'
+                   )); ?>  
+               </div> <!-- end of col-sm-3 -->
+           </div> <!-- end of form-group -->
+           <div class="form-group">
+             <?php echo $this->Form->input('Event.seat_number', array(
+                'type' => 'number',
+                'label' => 'Nombre de places :',
+                'class' => 'form-control',
+                'value' => $event_to_edit['Event']['seat_number'],
+                )); ?>  
+            </div> <!-- end of form-group -->
+            <div class="form-group">
+             <?php echo $this->Form->input('Event.seat_reserved', array(
+                'type' => 'number',
+                'label' => 'Nombre de places réservées :',
+                'class' => 'form-control',
+                'value' => $event_to_edit['Event']['seat_reserved'],
+                )); ?>  
+            </div> <!-- end of form-group -->
+            <input type="text" style="visibility: hidden" id="id" name="id" value="<?php echo $id;?>"/>
+            <div class="form-group">
+                <?php echo $this->Form->end(array(
+                    'label' => 'Enregistrer',
+                    'id' => 'next-button'
+                    ));?>
+            </div> <!-- end of form-group -->
 </div> <!-- end of data-form -->

@@ -7,7 +7,7 @@
                 array('controller' => 'companies', 'action' => 'index'), array('escape' => false));?>
             </li>
             <li class="<?php echo (!empty($this->params['action']) && ($this->params['action'] == 'index') && $this->params['controller'] == 'events') ? 'active' : 'inactive' ?>">
-                <?php echo $this->Html->link('<span id="calendar" class="glyphicon glyphicon-calendar"></span> Evènements',
+                <?php echo $this->Html->link('<span id="calendar" class="glyphicon glyphicon-calendar"></span> Evénements',
                 array('controller' => 'events', 'action' => 'index'), array('escape' => false));?>
             </li>
             <li class="<?php echo (!empty($this->params['action']) && ($this->params['action'] == 'index') && $this->params['controller'] == 'notifications')?'active' : 'inactive' ?>">

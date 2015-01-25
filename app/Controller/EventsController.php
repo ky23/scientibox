@@ -46,9 +46,10 @@ class EventsController extends AppController {
 			} else {
 				$this->Event->create();
 			}
-			$this->request->data['date'] = date("Y-m-d", strtotime($this->request->data['date']));
+			$this->request->data['Event']['date'] = date("Y-m-d", strtotime($this->request->data['Event']['date']));
+			//debug($this->request->data); die();
 			if ($this->Event->save($this->request->data)) {
-					//$this->Session->setFlash(__('Your post has been saved.'));`
+				$this->Session->setFlash('L\'évènement a bien été sauvegarder', 'flash_success');
 				return $this->redirect(array('action' => 'index'));
 			}
 		}
@@ -66,7 +67,7 @@ class EventsController extends AppController {
 			throw new NotFoundException(__('Evènement non valide.'));
 		}
 		if ($this->Event->delete($id)) {
-			//$this->Session->setFlash(__('Le post avec id : %s a été supprimé.', h($id)));
+			$this->Session->setFlash('L\'évènement a bien été supprimer', 'flash_success');
 			return $this->redirect(array('action' => 'index'));
 		}
 	}
