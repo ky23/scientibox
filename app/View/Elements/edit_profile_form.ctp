@@ -14,7 +14,7 @@
 </div> <!-- end of form-group -->
 <div class="informations">
 	<div class="form-group"> 
-		<h3 class="span8 pull-left title">Infomations générales sur le demandeur</h3>
+		<h3 class="span8 pull-left title">Infomations générales sur : <?php echo $applicant['Profile']['first_name'] . ' ' . $applicant['Profile']['last_name']?></h3>
 	</div> <!-- end of form-group -->
 	<div class="form-group">
 		<input type="text" name="tkn" style="display:none;" value="<?php echo $applicant['Applicant']['token']?>">
@@ -158,7 +158,7 @@
 																	), array(
 																	'class' => 'css-checkbox',
 																	'id' => 'had_company',
-																	'legend' => 'Avez vous déjà créé une Société en France (y compris Auto Entrepreneur) ? <span class="glyphicon glyphicon-asterisk required"/>',
+																	'legend' => 'Avez vous déjà créé une autre entreprise en France (y compris Auto-Entreprise) ?<span class="glyphicon glyphicon-asterisk required"/>',
 																	'label' => array(true, 'class' => 'css-label')
 																	));
 																	?>

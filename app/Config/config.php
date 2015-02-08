@@ -51,7 +51,11 @@ $config = array(
 		'SI' => 'Inscription',
 		'NL' => 'Nouveau token',
 		'Company' => 'Société',
-		'Profile' => 'Demandeur'),
+		'Profile' => 'Demandeur',
+		'uncomplete' => 'incomplet',
+		'valid' => 'validé',
+		'waiting' => 'en attente de validation',
+		'complete' => ' Dossier complet'),
 	'ItemPerPage' => 10
 );
 ?>

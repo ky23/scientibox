@@ -3,6 +3,7 @@
 echo "<script>var dateObject = " . json_encode($dates) . ';</script>';
 ?>
 <div class="date-selector">
+	<h2>Merci de choisir une date à laquelle vous décaisserez votre prêt</h2>
 	<form id="mapForm"> 
 		<div class="select-date"> 
 			<select id="selectpicker" onchange="onSelectChange()">

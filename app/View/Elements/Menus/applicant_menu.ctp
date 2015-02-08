@@ -13,7 +13,7 @@
                 <?php echo $this->Html->link('<span class="glyphicon glyphicon-list-alt"></span> Paiement BPI / AXA',
                 array('controller' => 'profiles', 'action' => 'warrantly'), array('escape' => false)); ?>
                 <li class="<?php echo (!empty($this->params['action']) && ($this->params['action'] == 'inscription') && $this->params['controller'] == 'companies') ? 'active' :'inactive' ?>">
-                    <?php echo $this->Html->link('<span class="glyphicon glyphicon-calendar"></span> Dates d\'inscription',
+                    <?php echo $this->Html->link('<span class="glyphicon glyphicon-calendar"></span> Scientitour',
                     array('controller' => 'companies', 'action' => 'inscription'), array('escape' => false)); ?>
                 </li>
                 <li class="deconnexion">

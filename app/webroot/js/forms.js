@@ -109,6 +109,7 @@
  			$('#pourcentage_shares_' + array[1]).text(result.toFixed(2));
  			if (result < 5) {
  				$('#pourcentage_shares_' + array[1]).parent().css({"background-color" : "#E84C3D", "color" : "white"});
+ 				alert("Attention, nous vous rappelons que vous devez détenir au moins 5% du capital à date. Merci de vérifier les informations ci-dessous.");
  			} else {
  				$('#pourcentage_shares_' + array[1]).parent().css({"background-color" : "#3fc380", "color" : "white"});
  			}
